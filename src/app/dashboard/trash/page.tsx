@@ -1,22 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useProjectStore } from '@/hooks/use-project-store';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import { ProjectCard } from '@/components/pages/dashboard/project-card';
-import { projects as initialProjects } from '@/lib/mock-data';
 import type { Project } from '@/lib/types';
 import Link from 'next/link';
 
 export default function TrashPage() {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
-
-  const handlePermanentDelete = (projectId: string) => {
-    setProjects(projects.filter(p => p.id !== projectId));
-  };
-
-  const handleRestore = (projectId: string) => {
-    setProjects(projects.map(p => p.id === projectId ? { ...p, status: 'Active' } : p));
-  };
+  const { projects, deleteProject, restoreProject } = useProjectStore();
   
   const archivedProjects = projects.filter(p => p.status === 'Archived');
 
@@ -43,8 +34,8 @@ export default function TrashPage() {
                     key={project.id} 
                     project={project} 
                     onArchive={() => {}} // No-op
-                    onDelete={handlePermanentDelete} 
-                    onRestore={handleRestore} 
+                    onDelete={deleteProject} 
+                    onRestore={restoreProject} 
                   />
                 ))}
               </div>
