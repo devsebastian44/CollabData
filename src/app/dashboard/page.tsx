@@ -17,10 +17,6 @@ export default function DashboardPage() {
     setProjects(projects.map(p => p.id === projectId ? { ...p, status: 'Archived' } : p));
   };
 
-  const handleDelete = (projectId: string) => {
-    setProjects(projects.filter(p => p.id !== projectId));
-  };
-
   const handleRestore = (projectId: string) => {
     setProjects(projects.map(p => p.id === projectId ? { ...p, status: 'Active' } : p));
   };
@@ -64,8 +60,8 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-              {projects.map(project => (
-                <ProjectCard key={project.id} project={project} onArchive={handleArchive} onDelete={handleDelete} onRestore={handleRestore} />
+              {projects.filter(p => p.status !== 'Archived').map(project => (
+                <ProjectCard key={project.id} project={project} onArchive={handleArchive} onDelete={handleArchive} onRestore={handleRestore} />
               ))}
             </div>
           </div>
