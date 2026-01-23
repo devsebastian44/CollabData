@@ -9,16 +9,24 @@ import { Card, CardContent, CardHeader, CardFooter, CardTitle, CardDescription }
 import { BrandLogo } from '@/components/icons/brand-logo';
 import { GoogleIcon } from '@/components/icons/google-icon';
 import { GithubIcon } from '@/components/icons/github-icon';
-import { Lock, EyeOff, Eye } from 'lucide-react';
+import { Lock, EyeOff, Eye, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [signUpPasswordVisible, setSignUpPasswordVisible] = useState(false);
+  const [signUpConfirmPasswordVisible, setSignUpConfirmPasswordVisible] = useState(false);
   const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Mock login and redirect
+    router.push('/dashboard');
+  };
+
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Mock signup and redirect
     router.push('/dashboard');
   };
 
@@ -67,8 +75,38 @@ export default function LoginPage() {
                 </form>
               </TabsContent>
               <TabsContent value="signup">
-                {/* Signup form can be added here */}
-                <p className="text-center text-muted-foreground">Sign up is not yet available.</p>
+                <form className="flex flex-col gap-5" onSubmit={handleSignUp}>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Input id="signup-name" placeholder="John Doe" type="text" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="signup-email">Email Address</Label>
+                    <Input id="signup-email" placeholder="name@example.com" type="email" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="signup-password">Password</Label>
+                    <div className="relative w-full">
+                      <Input id="signup-password" placeholder="Create a password" type={signUpPasswordVisible ? 'text' : 'password'} className="pr-12" />
+                      <Button type="button" variant="ghost" size="icon" className="absolute right-0 top-0 h-full px-4" onClick={() => setSignUpPasswordVisible(!signUpPasswordVisible)}>
+                        {signUpPasswordVisible ? <Eye size={20} /> : <EyeOff size={20} />}
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="signup-confirm-password">Confirm Password</Label>
+                    <div className="relative w-full">
+                      <Input id="signup-confirm-password" placeholder="Confirm your password" type={signUpConfirmPasswordVisible ? 'text' : 'password'} className="pr-12" />
+                      <Button type="button" variant="ghost" size="icon" className="absolute right-0 top-0 h-full px-4" onClick={() => setSignUpConfirmPasswordVisible(!signUpConfirmPasswordVisible)}>
+                        {signUpConfirmPasswordVisible ? <Eye size={20} /> : <EyeOff size={20} />}
+                      </Button>
+                    </div>
+                  </div>
+                  <Button type="submit" className="w-full h-12 font-bold shadow-lg shadow-primary/20 mt-2">
+                    <User size={20} />
+                    Sign Up
+                  </Button>
+                </form>
               </TabsContent>
             </Tabs>
 
