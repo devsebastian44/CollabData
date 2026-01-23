@@ -14,6 +14,8 @@ import { Switch } from '@/components/ui/switch';
 import { UploadCloud, Play, Link as LinkIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useProjectStore } from '@/hooks/use-project-store';
+import { useToast } from '@/hooks/use-toast';
 
 const descriptiveStats = [
   { id: 'mean', label: 'Mean & Median', checked: true },
@@ -32,6 +34,9 @@ const visualizations = [
 export default function NewAnalysisPage() {
   const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
   const router = useRouter();
+  const { addProject } = useProjectStore();
+  const { toast } = useToast();
+  const [analysisName, setAnalysisName] = useState('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +46,23 @@ export default function NewAnalysisPage() {
   };
   
   const handleCreateAnalysis = () => {
-    // Here we would handle form submission, for now we just navigate
-    // to a project page to show the result. A real implementation would
-    // probably create a new project and go to `/projects/[new_id]/results`
-    router.push('/projects/1/results');
+    if (!analysisName.trim()) {
+      toast({
+        variant: 'destructive',
+        title: 'Analysis name is required',
+        description: 'Please enter a name for your new analysis.',
+      });
+      return;
+    }
+    
+    addProject(analysisName);
+    
+    toast({
+        title: 'Analysis Created',
+        description: `Project "${analysisName}" has been created and is processing.`,
+    });
+
+    router.push('/dashboard');
   };
 
   return (
@@ -86,7 +104,13 @@ export default function NewAnalysisPage() {
                 <CardContent className="space-y-8">
                     <div className="space-y-2">
                         <Label htmlFor="analysis-name" className="text-white">Nombre del análisis</Label>
-                        <Input id="analysis-name" placeholder="e.g., Customer Churn Q4" className="bg-[#111722] border-border-dark" />
+                        <Input 
+                            id="analysis-name" 
+                            placeholder="e.g., Customer Churn Q4" 
+                            className="bg-[#111722] border-border-dark"
+                            value={analysisName}
+                            onChange={(e) => setAnalysisName(e.target.value)}
+                         />
                     </div>
 
                     <div className="space-y-4">

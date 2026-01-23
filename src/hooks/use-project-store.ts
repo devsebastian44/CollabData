@@ -1,6 +1,6 @@
 'use client';
 import { useState, useCallback, useEffect } from 'react';
-import { projects as initialProjects } from '@/lib/mock-data';
+import { projects as initialProjects, users } from '@/lib/mock-data';
 import type { Project } from '@/lib/types';
 
 const LOCAL_STORAGE_KEY = 'collabdata-projects';
@@ -40,6 +40,19 @@ export const useProjectStore = () => {
         }
     }, [projects, isInitialized]);
 
+    const addProject = useCallback((projectName: string) => {
+        if (!projectName) return;
+        const newProject: Project = {
+            id: new Date().getTime().toString(),
+            name: projectName,
+            status: 'Processing',
+            datasetCount: 1,
+            lastActive: 'Just now',
+            members: [users.user1, users.user2],
+        };
+        setProjects(prevProjects => [newProject, ...prevProjects]);
+    }, []);
+
     const archiveProject = useCallback((projectId: string) => {
         setProjects(prevProjects => 
             prevProjects.map(p => p.id === projectId ? { ...p, status: 'Archived' } : p)
@@ -56,5 +69,5 @@ export const useProjectStore = () => {
         setProjects(prevProjects => prevProjects.filter(p => p.id !== projectId));
     }, []);
 
-    return { projects, archiveProject, restoreProject, deleteProject };
+    return { projects, addProject, archiveProject, restoreProject, deleteProject };
 }
