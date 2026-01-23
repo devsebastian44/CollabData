@@ -41,7 +41,11 @@ export function DashboardSidebar() {
           </Link>
           <nav className="flex flex-col gap-2">
             {navLinks.map(link => {
-              const isActive = pathname === link.href;
+              const isDashboardActive = link.href === '/dashboard' && pathname === '/dashboard';
+              const isOtherPagesActive = link.href !== '/dashboard' && !link.href.startsWith('/projects') && pathname.startsWith(link.href);
+              const isDatasetActive = link.text === 'Datasets' && (pathname.startsWith('/projects') || pathname === '/dashboard/new-analysis');
+              const isActive = isDashboardActive || isOtherPagesActive || isDatasetActive;
+
               return (
                 <Link key={link.text} href={link.href} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                   isActive ? 'bg-[#232f48] text-white' : 'text-text-secondary hover:bg-[#232f48]/50 hover:text-white'
@@ -54,7 +58,7 @@ export function DashboardSidebar() {
           </nav>
         </div>
         <Button asChild>
-          <Link href="/projects/1">New Analysis</Link>
+          <Link href="/dashboard/new-analysis">New Analysis</Link>
         </Button>
       </div>
     </aside>

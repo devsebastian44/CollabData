@@ -1,0 +1,152 @@
+'use client';
+
+import { useState } from 'react';
+import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
+import Link from 'next/link';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Switch } from '@/components/ui/switch';
+import { UploadCloud, Play } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+const descriptiveStats = [
+  { id: 'mean', label: 'Mean & Median', checked: true },
+  { id: 'std', label: 'Standard Deviation', checked: true },
+  { id: 'missing', label: 'Missing Values' },
+  { id: 'skew', label: 'Skewness & Kurtosis' },
+];
+
+const visualizations = [
+  { id: 'hist', label: 'Histograms', checked: true },
+  { id: 'box', label: 'Boxplots', checked: true },
+  { id: 'heatmap', label: 'Correlation Heatmap' },
+  { id: 'scatter', label: 'Scatter Matrix' },
+];
+
+export default function NewAnalysisPage() {
+  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
+  const router = useRouter();
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setUploadedFile(event.target.files[0]);
+    }
+  };
+  
+  const handleCreateAnalysis = () => {
+    // Here we would handle form submission, for now we just navigate
+    // to a project page to show the result. A real implementation would
+    // probably create a new project and go to `/projects/[new_id]/results`
+    router.push('/projects/1/results');
+  };
+
+  return (
+    <div className="flex h-screen w-full bg-background-dark">
+      <DashboardSidebar />
+      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
+        <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <Link href="/dashboard" className="text-text-secondary text-sm font-medium leading-normal hover:text-white transition-colors">Dashboard</Link>
+              <span className="text-text-secondary text-sm font-medium leading-normal">/</span>
+              <span className="text-white text-lg font-bold leading-normal">New Analysis</span>
+            </div>
+            <div className="flex items-center gap-3">
+              {userAvatar && (
+                <Image
+                    src={userAvatar.imageUrl}
+                    alt="User profile picture"
+                    width={40}
+                    height={40}
+                    className="rounded-full ring-2 ring-primary/20"
+                    data-ai-hint={userAvatar.imageHint}
+                />
+              )}
+              <div className="text-left hidden sm:block">
+                <p className="text-sm text-white font-medium">Alex Johnson</p>
+                <p className="text-xs text-white/50">Data Scientist</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+          <div className="max-w-3xl mx-auto">
+            <Card className="bg-surface-dark border-border-dark">
+                <CardHeader>
+                    <CardTitle className="text-xl">Create New Analysis</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-8">
+                    <div className="space-y-2">
+                        <Label htmlFor="analysis-name" className="text-white">Nombre del análisis</Label>
+                        <Input id="analysis-name" placeholder="e.g., Customer Churn Q4" className="bg-[#111722] border-border-dark" />
+                    </div>
+
+                    <div className="space-y-4">
+                        <Label className="text-white">Herramientas de análisis</Label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                            <div>
+                                <h4 className="text-sm font-semibold text-slate-400 mb-3">Descriptive Statistics</h4>
+                                <div className="space-y-2">
+                                    {descriptiveStats.map(stat => (
+                                    <div key={stat.id} className="flex items-center justify-between group cursor-pointer p-1">
+                                        <Label htmlFor={stat.id} className="text-white text-sm group-hover:text-primary transition-colors cursor-pointer">{stat.label}</Label>
+                                        <Checkbox id={stat.id} defaultChecked={stat.checked} />
+                                    </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-semibold text-slate-400 mb-3">Visualizations</h4>
+                                <div className="space-y-3">
+                                    {visualizations.map(vis => (
+                                    <div key={vis.id} className="flex items-center justify-between p-1">
+                                        <Label htmlFor={vis.id} className="text-white text-sm cursor-pointer">{vis.label}</Label>
+                                        <Switch id={vis.id} defaultChecked={vis.checked} />
+                                    </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-white">Subir Datasets</Label>
+                        <div className="relative border-2 border-dashed border-border-dark rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
+                            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} />
+                            <label htmlFor="file-upload" className="w-full h-full absolute inset-0 cursor-pointer"></label>
+                            <UploadCloud className="mx-auto h-12 w-12 text-slate-400" />
+                            <p className="mt-2 text-sm text-slate-400">
+                                <span className="font-semibold text-primary">
+                                    Click to upload
+                                </span>
+                                 {' '}or drag and drop
+                            </p>
+                            <p className="text-xs text-slate-500">CSV, XLSX, JSON up to 200MB</p>
+                            {uploadedFile && (
+                                <p className="mt-4 text-sm font-medium text-green-400">
+                                    File selected: {uploadedFile.name}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </CardContent>
+                <CardFooter>
+                    <Button className="w-full h-11 font-bold shadow-lg shadow-primary/20" onClick={handleCreateAnalysis}>
+                        <Play />
+                        Create and Run Analysis
+                    </Button>
+                </CardFooter>
+            </Card>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
