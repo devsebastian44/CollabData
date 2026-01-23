@@ -15,10 +15,10 @@ export function ResultsHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#111722]">
       <div className="px-6 lg:px-8 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-4">
           <BrandIcon />
           <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] font-headline">CollabData Pro</h2>
-        </div>
+        </Link>
         <div className="hidden md:flex flex-1 justify-center gap-8">
           <nav className="flex items-center gap-6">
             <Link className="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white text-sm font-medium transition-colors" href="/dashboard">Dashboard</Link>

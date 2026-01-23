@@ -18,7 +18,7 @@ export function DashboardSidebar() {
     <aside className="hidden md:flex w-64 flex-col border-r border-border-dark bg-[#111722] shrink-0 h-full overflow-y-auto">
       <div className="flex h-full flex-col justify-between p-4">
         <div className="flex flex-col gap-4">
-          <div className="flex gap-3 items-center mb-4 px-2">
+          <Link href="/" className="flex gap-3 items-center mb-4 px-2">
             {workspaceAvatar && (
                 <Image
                     src={workspaceAvatar.imageUrl}
@@ -33,7 +33,7 @@ export function DashboardSidebar() {
               <h1 className="text-white text-base font-medium leading-normal font-headline">CollabData</h1>
               <p className="text-text-secondary text-sm font-normal leading-normal">Pro Workspace</p>
             </div>
-          </div>
+          </Link>
           <nav className="flex flex-col gap-2">
             {navLinks.map(link => (
               <Link key={link.text} href={link.href} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${

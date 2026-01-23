@@ -8,7 +8,7 @@ export function WorkspaceHeader() {
 
   return (
     <header className="flex shrink-0 items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark px-6 py-3 h-16">
-      <Link href="/dashboard" className="flex items-center gap-4">
+      <Link href="/" className="flex items-center gap-4">
         <div className="size-8 flex items-center justify-center bg-primary rounded-lg">
           <Database className="text-white" size={20} />
         </div>
