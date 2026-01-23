@@ -11,8 +11,9 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
-import { UploadCloud, Play } from 'lucide-react';
+import { UploadCloud, Play, Link as LinkIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const descriptiveStats = [
   { id: 'mean', label: 'Mean & Median', checked: true },
@@ -116,25 +117,42 @@ export default function NewAnalysisPage() {
                         </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                         <Label className="text-white">Subir Datasets</Label>
-                        <div className="relative border-2 border-dashed border-border-dark rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
-                            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} />
-                            <label htmlFor="file-upload" className="w-full h-full absolute inset-0 cursor-pointer"></label>
-                            <UploadCloud className="mx-auto h-12 w-12 text-slate-400" />
-                            <p className="mt-2 text-sm text-slate-400">
-                                <span className="font-semibold text-primary">
-                                    Click to upload
-                                </span>
-                                 {' '}or drag and drop
-                            </p>
-                            <p className="text-xs text-slate-500">CSV, XLSX, JSON up to 200MB</p>
-                            {uploadedFile && (
-                                <p className="mt-4 text-sm font-medium text-green-400">
-                                    File selected: {uploadedFile.name}
-                                </p>
-                            )}
-                        </div>
+                        <Tabs defaultValue="upload" className="w-full">
+                            <TabsList className="grid w-full grid-cols-2 bg-[#111722]">
+                                <TabsTrigger value="upload">Upload File</TabsTrigger>
+                                <TabsTrigger value="url">Import from URL</TabsTrigger>
+                            </TabsList>
+                            <TabsContent value="upload">
+                                <div className="relative mt-4 border-2 border-dashed border-border-dark rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
+                                    <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleFileChange} />
+                                    <label htmlFor="file-upload" className="w-full h-full absolute inset-0 cursor-pointer"></label>
+                                    <UploadCloud className="mx-auto h-12 w-12 text-slate-400" />
+                                    <p className="mt-2 text-sm text-slate-400">
+                                        <span className="font-semibold text-primary">
+                                            Click to upload
+                                        </span>
+                                         {' '}or drag and drop
+                                    </p>
+                                    <p className="text-xs text-slate-500">CSV, XLSX, JSON up to 200MB</p>
+                                    {uploadedFile && (
+                                        <p className="mt-4 text-sm font-medium text-green-400">
+                                            File selected: {uploadedFile.name}
+                                        </p>
+                                    )}
+                                </div>
+                            </TabsContent>
+                            <TabsContent value="url">
+                                <div className="mt-4 space-y-2">
+                                    <Label htmlFor="dataset-url" className="text-white">Dataset URL</Label>
+                                    <div className="relative">
+                                        <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                                        <Input id="dataset-url" placeholder="https://example.com/dataset.csv" className="bg-[#111722] border-border-dark pl-10" />
+                                    </div>
+                                </div>
+                            </TabsContent>
+                        </Tabs>
                     </div>
                 </CardContent>
                 <CardFooter>
