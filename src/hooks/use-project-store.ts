@@ -3,36 +3,57 @@ import { useState, useCallback, useEffect } from 'react';
 import { projects as initialProjects } from '@/lib/mock-data';
 import type { Project } from '@/lib/types';
 
-// This is a simple in-memory store.
-// For a real app, you'd use a proper state management library or context.
-let projectsStore: Project[] = [...initialProjects];
-const listeners = new Set<() => void>();
-
-const notify = () => listeners.forEach(l => l());
+const LOCAL_STORAGE_KEY = 'collabdata-projects';
 
 export const useProjectStore = () => {
-    const [projects, setProjects] = useState<Project[]>(projectsStore);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [isInitialized, setIsInitialized] = useState(false);
 
+    // Load from localStorage on initial client-side mount
     useEffect(() => {
-        const listener = () => setProjects([...projectsStore]);
-        listeners.add(listener);
-        listener(); // Sync on mount
-        return () => listeners.delete(listener);
+        try {
+            const storedProjects = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (storedProjects) {
+                setProjects(JSON.parse(storedProjects));
+            } else {
+                // If nothing in storage, use initial mock data and set it in localStorage
+                setProjects(initialProjects);
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(initialProjects));
+            }
+        } catch (error) {
+            // If something goes wrong (e.g. private browsing), use mock data
+            console.error("Failed to access localStorage:", error);
+            setProjects(initialProjects);
+        }
+        setIsInitialized(true);
     }, []);
 
+    // Save to localStorage whenever projects change
+    useEffect(() => {
+        // Only save after the initial load to prevent overwriting on first render
+        if (isInitialized) {
+            try {
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects));
+            } catch (error) {
+                console.error("Failed to save to localStorage:", error);
+            }
+        }
+    }, [projects, isInitialized]);
+
     const archiveProject = useCallback((projectId: string) => {
-        projectsStore = projectsStore.map(p => p.id === projectId ? { ...p, status: 'Archived' } : p);
-        notify();
+        setProjects(prevProjects => 
+            prevProjects.map(p => p.id === projectId ? { ...p, status: 'Archived' } : p)
+        );
     }, []);
 
     const restoreProject = useCallback((projectId: string) => {
-        projectsStore = projectsStore.map(p => p.id === projectId ? { ...p, status: 'Active' } : p);
-        notify();
+        setProjects(prevProjects => 
+            prevProjects.map(p => p.id === projectId ? { ...p, status: 'Active' } : p)
+        );
     }, []);
 
     const deleteProject = useCallback((projectId: string) => {
-        projectsStore = projectsStore.filter(p => p.id !== projectId);
-        notify();
+        setProjects(prevProjects => prevProjects.filter(p => p.id !== projectId));
     }, []);
 
     return { projects, archiveProject, restoreProject, deleteProject };
