@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,9 +8,23 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { files, referenceFiles } from '@/lib/mock-data';
 import type { DatasetFile } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { MoreVertical, UploadCloud } from 'lucide-react';
+import { MoreVertical, UploadCloud, Eye, Trash2 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useRouter } from 'next/navigation';
 
-const DatasetItem = ({ file }: { file: DatasetFile }) => {
+const DatasetItem = ({ file, onDelete }: { file: DatasetFile, onDelete: (name: string) => void }) => {
+    const router = useRouter();
+
+    const handleViewAnalysis = () => {
+        // Navigate to a generic project page for now
+        router.push('/projects/1/results');
+    };
+
     return (
         <div className="group flex items-center gap-4 p-4 bg-surface-dark border border-border-dark rounded-lg hover:border-primary/50 transition-all">
             <div className="flex items-center justify-center shrink-0 w-10 h-10 rounded-lg bg-background-dark">
@@ -19,9 +34,23 @@ const DatasetItem = ({ file }: { file: DatasetFile }) => {
                 <p className="text-white text-sm font-medium truncate group-hover:text-primary">{file.name}</p>
                 <p className="text-xs text-slate-400">{file.size} • {file.type.toUpperCase()} • {file.status}</p>
             </div>
-            <Button variant="ghost" size="icon" className="text-text-secondary opacity-0 group-hover:opacity-100">
-                <MoreVertical />
-            </Button>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="text-text-secondary opacity-0 group-hover:opacity-100 -mr-2">
+                        <MoreVertical />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuItem onSelect={handleViewAnalysis}>
+                        <Eye className="mr-2 h-4 w-4" />
+                        <span>Ver análisis</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(file.name)}>
+                        <Trash2 className="mr-2 h-4 w-4" />
+                        <span>Borrar</span>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
     );
 };
@@ -29,7 +58,11 @@ const DatasetItem = ({ file }: { file: DatasetFile }) => {
 
 export default function DatasetsPage() {
   const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
-  const allFiles = [...files, ...referenceFiles];
+  const [allFiles, setAllFiles] = useState([...files, ...referenceFiles]);
+
+  const handleDeleteFile = (fileName: string) => {
+    setAllFiles(currentFiles => currentFiles.filter(f => f.name !== fileName));
+  }
 
   return (
     <div className="flex h-screen w-full bg-background-dark">
@@ -75,7 +108,7 @@ export default function DatasetsPage() {
             {allFiles.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {allFiles.map(file => (
-                  <DatasetItem key={file.name} file={file} />
+                  <DatasetItem key={file.name} file={file} onDelete={handleDeleteFile} />
                 ))}
               </div>
             ) : (
