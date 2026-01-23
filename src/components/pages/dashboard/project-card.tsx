@@ -28,6 +28,9 @@ import {
 
 type ProjectCardProps = {
   project: Project;
+  onArchive: (projectId: string) => void;
+  onDelete: (projectId: string) => void;
+  onRestore: (projectId: string) => void;
 };
 
 const statusStyles: { [key: string]: string } = {
@@ -37,7 +40,7 @@ const statusStyles: { [key: string]: string } = {
   Review: 'bg-purple-400/10 text-purple-400 ring-purple-400/20',
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onArchive, onDelete, onRestore }: ProjectCardProps) {
   const router = useRouter();
   const displayedMembers = project.members.slice(0, 3);
   const remainingMembers = project.members.length - displayedMembers.length;
@@ -62,16 +65,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <ArrowRight className="mr-2 h-4 w-4" />
               <span>View Project</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
               <Edit className="mr-2 h-4 w-4" />
               <span>Edit</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => onArchive(project.id)}>
               <Archive className="mr-2 h-4 w-4" />
               <span>Archive</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500">
+            <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
               <Trash2 className="mr-2 h-4 w-4" />
               <span>Delete</span>
             </DropdownMenuItem>
@@ -109,10 +112,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
         
         {project.status === 'Archived' ? (
-          <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
-            <Link href="#">
-              Restore <History size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
-            </Link>
+          <Button variant="link" className="text-primary p-0 h-auto group/link" onClick={() => onRestore(project.id)}>
+            Restore <History size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
           </Button>
         ) : (
           <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
