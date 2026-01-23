@@ -1,6 +1,7 @@
 import type { Project, User, DatasetFile, DescriptiveStat } from '@/lib/types';
 import { FileText, Table, Braces } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import React from 'react';
 
 export const users: { [key: string]: User } = {
   user1: { name: 'Alice', avatarUrl: PlaceHolderImages.find(p => p.id === 'user-1')?.imageUrl || '' },
@@ -54,13 +55,13 @@ export const projects: Project[] = [
 ];
 
 export const files: DatasetFile[] = [
-    { name: 'Q3_Sales_Data.csv', type: 'csv', size: '24MB', status: 'Synced', icon: <FileText className="text-green-400" />, isActive: true },
-    { name: 'Customer_Survey_2023.xlsx', type: 'xlsx', size: '2MB', status: 'Local', icon: <Table className="text-blue-400" /> },
+    { name: 'Q3_Sales_Data.csv', type: 'csv', size: '24MB', status: 'Synced', icon: React.createElement(FileText, { className: "text-green-400" }), isActive: true },
+    { name: 'Customer_Survey_2023.xlsx', type: 'xlsx', size: '2MB', status: 'Local', icon: React.createElement(Table, { className: "text-blue-400" }) },
 ];
 
 export const referenceFiles: DatasetFile[] = [
-    { name: 'Manifest_Config.json', type: 'json', size: '14KB', status: 'Synced', icon: <Braces className="text-yellow-400" /> },
-    { name: 'Historical_Log_2022.csv', type: 'csv', size: '156MB', status: 'Archived', icon: <FileText className="text-green-400" /> },
+    { name: 'Manifest_Config.json', type: 'json', size: '14KB', status: 'Synced', icon: React.createElement(Braces, { className: "text-yellow-400" }) },
+    { name: 'Historical_Log_2022.csv', type: 'csv', size: '156MB', status: 'Archived', icon: React.createElement(FileText, { className: "text-green-400" }) },
 ];
 
 export const tableData = [
