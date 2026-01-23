@@ -43,7 +43,7 @@ export function DashboardSidebar() {
             {navLinks.map(link => {
               const isDashboardActive = link.href === '/dashboard' && pathname === '/dashboard';
               const isOtherPagesActive = link.href !== '/dashboard' && !link.href.startsWith('/projects') && pathname.startsWith(link.href);
-              const isDatasetActive = link.text === 'Datasets' && (pathname.startsWith('/projects') || pathname === '/dashboard/new-analysis');
+              const isDatasetActive = link.text === 'Datasets' && pathname.startsWith('/projects');
               const isActive = isDashboardActive || isOtherPagesActive || isDatasetActive;
 
               return (
