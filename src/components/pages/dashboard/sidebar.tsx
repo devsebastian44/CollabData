@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/dashboard', icon: <LayoutGrid />, text: 'Dashboard' },
-  { href: '/projects/1', icon: <Database />, text: 'Datasets' },
+  { href: '/dashboard/datasets', icon: <Database />, text: 'Datasets' },
   { href: '/dashboard/analysis-tools', icon: <ScatterChart />, text: 'Analysis Tools' },
   { href: '/dashboard/settings', icon: <Settings />, text: 'Settings' },
   { href: '/dashboard/trash', icon: <Trash2 />, text: 'Trash' },
@@ -42,9 +42,10 @@ export function DashboardSidebar() {
           <nav className="flex flex-col gap-2">
             {navLinks.map(link => {
               const isDashboardActive = link.href === '/dashboard' && pathname === '/dashboard';
-              const isOtherPagesActive = link.href !== '/dashboard' && !link.href.startsWith('/projects') && pathname.startsWith(link.href);
-              const isDatasetActive = link.text === 'Datasets' && pathname.startsWith('/projects');
-              const isActive = isDashboardActive || isOtherPagesActive || isDatasetActive;
+              const isDatasetsSection = link.text === 'Datasets' && (pathname.startsWith('/dashboard/datasets') || pathname.startsWith('/projects'));
+              const isOtherPageActive = link.href !== '/dashboard' && link.text !== 'Datasets' && pathname.startsWith(link.href);
+
+              const isActive = isDashboardActive || isDatasetsSection || isOtherPageActive;
 
               return (
                 <Link key={link.text} href={link.href} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
