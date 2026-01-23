@@ -1,10 +1,30 @@
+'use client';
+
 import type { Project } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardFooter, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MoreVertical, Database as DatabaseIcon, Clock, ArrowRight, History } from 'lucide-react';
+import { 
+  MoreVertical, 
+  Database as DatabaseIcon, 
+  Clock, 
+  ArrowRight, 
+  History,
+  Edit,
+  Archive,
+  Trash2
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
 
 type ProjectCardProps = {
   project: Project;
@@ -18,6 +38,7 @@ const statusStyles: { [key: string]: string } = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const router = useRouter();
   const displayedMembers = project.members.slice(0, 3);
   const remainingMembers = project.members.length - displayedMembers.length;
 
@@ -30,9 +51,32 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </CardTitle>
           <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
         </div>
-        <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mr-2 -mt-2">
-          <MoreVertical />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mr-2 -mt-2">
+              <MoreVertical />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
+              <ArrowRight className="mr-2 h-4 w-4" />
+              <span>View Project</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Edit className="mr-2 h-4 w-4" />
+              <span>Edit</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Archive className="mr-2 h-4 w-4" />
+              <span>Archive</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500">
+              <Trash2 className="mr-2 h-4 w-4" />
+              <span>Delete</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </CardHeader>
       <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
         <div className="flex items-center gap-1.5" title="Datasets">

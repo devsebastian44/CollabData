@@ -52,7 +52,9 @@ export function DashboardSidebar() {
             })}
           </nav>
         </div>
-        <Button>New Analysis</Button>
+        <Button asChild>
+          <Link href="/projects/1">New Analysis</Link>
+        </Button>
       </div>
     </aside>
   );

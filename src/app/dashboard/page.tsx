@@ -18,9 +18,11 @@ export default function DashboardPage() {
               <span className="text-text-secondary text-sm font-medium leading-normal">/</span>
               <span className="text-white text-lg font-bold leading-normal">Projects</span>
             </div>
-            <Button className="min-w-[140px] font-bold shadow-lg shadow-blue-900/20">
-              <Plus size={20} />
-              Create New Project
+            <Button asChild className="min-w-[140px] font-bold shadow-lg shadow-blue-900/20">
+              <Link href="/projects/1">
+                <Plus size={20} />
+                Create New Project
+              </Link>
             </Button>
           </div>
         </header>
