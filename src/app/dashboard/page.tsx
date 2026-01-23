@@ -5,12 +5,15 @@ import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import { ProjectCard } from '@/components/pages/dashboard/project-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search, ChevronDown, LayoutGrid, List } from 'lucide-react';
+import { Search, ChevronDown, LayoutGrid, List } from 'lucide-react';
 import type { Project } from '@/lib/types';
 import Link from 'next/link';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function DashboardPage() {
-  const { projects, archiveProject, restoreProject } = useProjectStore();
+  const { projects, archiveProject, restoreProject, deleteProject } = useProjectStore();
+  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
 
   return (
     <div className="flex h-screen w-full bg-background-dark">
@@ -23,12 +26,22 @@ export default function DashboardPage() {
               <span className="text-text-secondary text-sm font-medium leading-normal">/</span>
               <span className="text-white text-lg font-bold leading-normal">Projects</span>
             </div>
-            <Button asChild className="min-w-[140px] font-bold shadow-lg shadow-blue-900/20">
-              <Link href="/projects/1">
-                <Plus size={20} />
-                Create New Project
-              </Link>
-            </Button>
+            <div className="flex items-center gap-3">
+              {userAvatar && (
+                <Image
+                    src={userAvatar.imageUrl}
+                    alt="User profile picture"
+                    width={40}
+                    height={40}
+                    className="rounded-full ring-2 ring-primary/20"
+                    data-ai-hint={userAvatar.imageHint}
+                />
+              )}
+              <div className="text-left hidden sm:block">
+                <p className="text-sm text-white font-medium">Alex Johnson</p>
+                <p className="text-xs text-white/50">Data Scientist</p>
+              </div>
+            </div>
           </div>
         </header>
 
