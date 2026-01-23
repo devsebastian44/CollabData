@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Database, ScatterChart, Settings, Trash2 } from 'lucide-react';
+import { LayoutGrid, Database, ScatterChart, Trash2 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -11,7 +11,6 @@ const navLinks = [
   { href: '/dashboard', icon: <LayoutGrid />, text: 'Dashboard' },
   { href: '/dashboard/datasets', icon: <Database />, text: 'Datasets' },
   { href: '/dashboard/analysis-tools', icon: <ScatterChart />, text: 'Analysis Tools' },
-  { href: '/dashboard/settings', icon: <Settings />, text: 'Settings' },
   { href: '/dashboard/trash', icon: <Trash2 />, text: 'Trash' },
 ];
 
