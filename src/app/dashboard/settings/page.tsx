@@ -141,7 +141,7 @@ export default function SettingsPage() {
                             <CardContent className="space-y-8">
                                 <div className="flex items-center gap-6">
                                     <div className="relative">
-                                        <Image src={photoURL} alt="Profile picture" width={96} height={96} className="rounded-full object-cover" />
+                                        {photoURL && <Image src={photoURL} alt="Profile picture" width={96} height={96} className="rounded-full object-cover" />}
                                         <Button size="icon" className="absolute bottom-0 right-0 rounded-full h-8 w-8 cursor-pointer">
                                             <Camera size={16}/>
                                             <span className="sr-only">Change photo</span>
