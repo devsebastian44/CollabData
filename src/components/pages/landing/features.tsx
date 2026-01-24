@@ -40,7 +40,6 @@ export function Features() {
       title: 'Smart Cleaning',
       description: 'AI-suggested cleaning rules for messy data. Standardize dates and categorical values instantly.',
       hoverBorder: 'hover:border-accent-teal/50',
-      translate: 'sm:translate-y-12'
     },
     {
       icon: <Lock className="text-6xl text-slate-300 dark:text-slate-600 group-hover:text-purple-500 transition-colors duration-300" />,
@@ -53,7 +52,6 @@ export function Features() {
       title: 'Robust API',
       description: 'Programmatic access to all your datasets. Automate pipelines via our RESTful API.',
       hoverBorder: 'hover:border-blue-400/50',
-      translate: 'sm:translate-y-12'
     },
   ];
 
@@ -66,7 +64,7 @@ export function Features() {
       </div>
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row gap-12 lg:gap-20">
-          <div className="md:w-1/3 flex flex-col gap-6 sticky top-24 h-fit">
+          <div className="md:w-1/3 flex flex-col gap-6">
             <h2 className="text-3xl md:text-4xl font-black leading-tight font-headline">
               Engineered for <br />
               <span className="text-primary">Modern Data Teams</span>
@@ -91,7 +89,7 @@ export function Features() {
 
           <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {gridFeatures.map((feature, index) => (
-              <div key={index} className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#151e2e] p-6 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 ${feature.hoverBorder} ${feature.translate || ''}`}>
+              <div key={index} className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#151e2e] p-6 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 ${feature.hoverBorder}`}>
                 <div className="h-40 w-full mb-6 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden flex items-center justify-center">
                   {feature.icon}
                   <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#151e2e] to-transparent"></div>
