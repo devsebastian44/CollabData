@@ -174,13 +174,13 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
           <div className="flex items-center gap-1.5" title="Datasets">
-            <DatabaseIcon size={18} />
+            <DatabaseIcon size={18} className="shrink-0" />
             <span>{project.datasetCount} {project.datasetCount === 1 ? 'Dataset' : 'Datasets'}</span>
           </div>
           {timeAgo && (
-            <div className="flex items-center gap-1.5" title="Last Active">
-                <Clock size={18} />
-                <span>{timeAgo}</span>
+            <div className="flex items-center gap-1.5" title="Created">
+                <Clock size={18} className="shrink-0" />
+                <span className="w-28">{timeAgo}</span>
             </div>
           )}
         </CardContent>
