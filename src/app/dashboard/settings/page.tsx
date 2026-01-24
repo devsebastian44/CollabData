@@ -82,7 +82,6 @@ export default function SettingsPage() {
                 title: 'Error deleting account',
                 description: 'This is a sensitive operation and may require a recent login. Please log out and log in again before retrying.',
             });
-            console.error(error);
         } finally {
             setIsDeleting(false);
         }
