@@ -77,11 +77,19 @@ export default function SettingsPage() {
             });
             router.push('/login');
         } catch (error: any) {
-            toast({
-                variant: 'destructive',
-                title: 'Error deleting account',
-                description: 'This is a sensitive operation and may require a recent login. Please log out and log in again before retrying.',
-            });
+            if (error.code === 'auth/requires-recent-login') {
+                toast({
+                    variant: 'destructive',
+                    title: 'Error deleting account',
+                    description: 'This is a sensitive operation and may require a recent login. Please log out and log in again before retrying.',
+                });
+            } else {
+                 toast({
+                    variant: 'destructive',
+                    title: 'Error deleting account',
+                    description: error.message || 'An unexpected error occurred.',
+                });
+            }
         } finally {
             setIsDeleting(false);
         }
