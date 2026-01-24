@@ -36,10 +36,12 @@ export default function NewAnalysisPage() {
   const { toast } = useToast();
   const [analysisName, setAnalysisName] = useState('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [datasetUrl, setDatasetUrl] = useState('');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setUploadedFile(event.target.files[0]);
+      setDatasetUrl('');
     }
   };
   
@@ -53,11 +55,14 @@ export default function NewAnalysisPage() {
       return;
     }
     
-    addProject(analysisName, !!uploadedFile);
+    const hasFile = !!uploadedFile || !!datasetUrl.trim();
+    addProject(analysisName, hasFile);
     
     toast({
         title: 'Analysis Created',
-        description: `Project "${analysisName}" has been created and is processing.`,
+        description: hasFile 
+            ? `Project "${analysisName}" has been created and is processing.`
+            : `Project "${analysisName}" has been created. Upload a dataset to begin.`,
     });
 
     router.push('/dashboard');
@@ -155,7 +160,16 @@ export default function NewAnalysisPage() {
                                     <Label htmlFor="dataset-url" className="text-white">Dataset URL</Label>
                                     <div className="relative">
                                         <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                                        <Input id="dataset-url" placeholder="https://example.com/dataset.csv" className="bg-[#111722] border-border-dark pl-10" />
+                                        <Input 
+                                            id="dataset-url" 
+                                            placeholder="https://example.com/dataset.csv" 
+                                            className="bg-[#111722] border-border-dark pl-10"
+                                            value={datasetUrl}
+                                            onChange={(e) => {
+                                                setDatasetUrl(e.target.value);
+                                                if (e.target.value) setUploadedFile(null);
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             </TabsContent>
