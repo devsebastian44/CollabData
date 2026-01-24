@@ -82,9 +82,9 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
         );
       case 'Processing':
         return (
-          <Button variant="link" className="text-amber-400 p-0 h-auto" disabled>
+          <div className="flex items-center gap-2 text-sm text-amber-400">
             Processing... <Loader2 className="ml-2 h-4 w-4 animate-spin" />
-          </Button>
+          </div>
         );
       case 'Error':
         return (
