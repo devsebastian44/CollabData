@@ -13,14 +13,8 @@ export function MainHeader() {
             </div>
             <h2 className="text-lg font-bold tracking-tight font-headline">CollabData</h2>
           </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#">Features</Link>
-            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#">Pricing</Link>
-            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#">Docs</Link>
-            <Link className="text-sm font-medium hover:text-primary transition-colors" href="#">Community</Link>
-          </div>
           <div className="flex gap-3">
-            <Button variant="ghost" className="hidden sm:flex" asChild>
+            <Button variant="ghost" asChild>
               <Link href="/login">Log In</Link>
             </Button>
             <Button asChild className="font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
