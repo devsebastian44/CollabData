@@ -69,43 +69,43 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
   return (
     <>
       <Card className="group flex flex-col gap-4 bg-surface-dark border-border-dark hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200">
-        <CardHeader className="flex-row justify-between items-start pb-2">
-          <div className="flex flex-col gap-1">
+        <CardHeader className="pb-2">
+          <div className="flex justify-between items-start">
             <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
               <Link href={`/projects/${project.id}`}>{project.name}</Link>
             </CardTitle>
-            <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-2">
+                  <MoreVertical />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  <span>View Analysis</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
+                  <Edit className="mr-2 h-4 w-4" />
+                  <span>Open Workspace</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
+                  <PenLine className="mr-2 h-4 w-4" />
+                  <span>Rename</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => onArchive(project.id)}>
+                  <Archive className="mr-2 h-4 w-4" />
+                  <span>Archive</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  <span>Delete</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-2">
-                <MoreVertical />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
-                <ArrowRight className="mr-2 h-4 w-4" />
-                <span>View Analysis</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
-                <Edit className="mr-2 h-4 w-4" />
-                <span>Open Workspace</span>
-              </DropdownMenuItem>
-               <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
-                <PenLine className="mr-2 h-4 w-4" />
-                <span>Rename</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => onArchive(project.id)}>
-                <Archive className="mr-2 h-4 w-4" />
-                <span>Archive</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
-                <Trash2 className="mr-2 h-4 w-4" />
-                <span>Delete</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
           <div className="flex items-center gap-1.5" title="Datasets">
