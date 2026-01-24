@@ -1,4 +1,4 @@
-import { Users, LineChart, History, Database, Code, Lock } from 'lucide-react';
+import { Users, LineChart, History, Database, Code, Lock, Sparkles } from 'lucide-react';
 
 export function Features() {
   const mainFeatures = [
@@ -24,31 +24,45 @@ export function Features() {
 
   const gridFeatures = [
     {
-      icon: <Database className="text-6xl text-slate-300 dark:text-slate-600 group-hover:text-primary transition-colors duration-300" />,
+      icon: (
+        <>
+          <div className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent" />
+          <Database className="text-5xl text-primary" />
+        </>
+      ),
       title: 'Connect Any Source',
       description: 'Seamlessly integrate with PostgreSQL, Snowflake, BigQuery, and S3 buckets with one click.',
       hoverBorder: 'hover:border-primary/50'
     },
     {
       icon: (
-        <div className="w-full h-full p-4 flex flex-col gap-2">
-          <div className="w-full h-2 bg-slate-300 dark:bg-slate-600 rounded-full animate-pulse delay-75"></div>
-          <div className="w-3/4 h-2 bg-slate-300 dark:bg-slate-600 rounded-full animate-pulse delay-150"></div>
-          <div className="w-1/2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full animate-pulse"></div>
-        </div>
+        <>
+          <div className="absolute inset-0 bg-gradient-radial from-accent-teal/10 to-transparent" />
+          <Sparkles className="text-5xl text-accent-teal" />
+        </>
       ),
       title: 'Smart Cleaning',
       description: 'AI-suggested cleaning rules for messy data. Standardize dates and categorical values instantly.',
       hoverBorder: 'hover:border-accent-teal/50',
     },
     {
-      icon: <Lock className="text-6xl text-slate-300 dark:text-slate-600 group-hover:text-purple-500 transition-colors duration-300" />,
+      icon: (
+        <>
+          <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 to-transparent" />
+          <Lock className="text-5xl text-purple-500" />
+        </>
+      ),
       title: 'Enterprise Security',
       description: 'SOC2 Type II compliant. Role-based access control (RBAC) and audit logs built-in.',
       hoverBorder: 'hover:border-purple-500/50'
     },
     {
-      icon: <Code className="text-6xl text-slate-300 dark:text-slate-600 group-hover:text-blue-400 transition-colors duration-300" />,
+      icon: (
+        <>
+          <div className="absolute inset-0 bg-gradient-radial from-blue-400/10 to-transparent" />
+          <Code className="text-5xl text-blue-400" />
+        </>
+      ),
       title: 'Robust API',
       description: 'Programmatic access to all your datasets. Automate pipelines via our RESTful API.',
       hoverBorder: 'hover:border-blue-400/50',
@@ -92,7 +106,6 @@ export function Features() {
               <div key={index} className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#151e2e] p-6 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 ${feature.hoverBorder}`}>
                 <div className="h-40 w-full mb-6 bg-slate-100 dark:bg-slate-800 rounded-lg relative overflow-hidden flex items-center justify-center">
                   {feature.icon}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#151e2e] to-transparent"></div>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
                 <p className="text-slate-500 dark:text-slate-400">{feature.description}</p>
