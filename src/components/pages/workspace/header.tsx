@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Database, LogOut } from 'lucide-react';
+import { Database, LogOut, Settings } from 'lucide-react';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useRouter } from 'next/navigation';
@@ -44,9 +44,8 @@ export function WorkspaceHeader() {
       <div className="flex flex-1 justify-end gap-8">
         <nav className="hidden md:flex items-center gap-6">
           <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="/dashboard">Dashboard</Link>
-          <Link className="text-white text-sm font-medium leading-normal" href="/dashboard/datasets">Datasets</Link>
+          <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal" href="/dashboard/datasets">Datasets</Link>
           <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="/dashboard/analysis-tools">Analysis Tools</Link>
-          <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Settings</Link>
         </nav>
         <div className="flex items-center gap-3 pl-4 border-l border-border-dark">
            {loading ? (
@@ -80,6 +79,11 @@ export function WorkspaceHeader() {
                   </p>
                 </div>
               </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={() => router.push('/dashboard/settings')}>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
