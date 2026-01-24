@@ -92,24 +92,28 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore }: Project
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between pt-2">
-        <div className="flex -space-x-2 overflow-hidden">
-          {displayedMembers.map(member => (
-            <Image
-              key={member.name}
-              src={member.avatarUrl}
-              alt={member.name}
-              width={32}
-              height={32}
-              className="inline-block rounded-full ring-2 ring-background-dark"
-              data-ai-hint="person face"
-            />
-          ))}
-          {remainingMembers > 0 && (
-            <div className="inline-block size-8 rounded-full flex items-center justify-center bg-[#232f48] text-xs font-medium text-white ring-2 ring-background-dark">
-              +{remainingMembers}
-            </div>
-          )}
-        </div>
+        {project.members.length > 1 ? (
+          <div className="flex -space-x-2 overflow-hidden">
+            {displayedMembers.map(member => (
+              <Image
+                key={member.name}
+                src={member.avatarUrl}
+                alt={member.name}
+                width={32}
+                height={32}
+                className="inline-block rounded-full ring-2 ring-background-dark object-cover"
+                data-ai-hint="person face"
+              />
+            ))}
+            {remainingMembers > 0 && (
+              <div className="inline-block size-8 rounded-full flex items-center justify-center bg-[#232f48] text-xs font-medium text-white ring-2 ring-background-dark">
+                +{remainingMembers}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div />
+        )}
         
         {project.status === 'Archived' ? (
           <Button variant="link" className="text-primary p-0 h-auto group/link" onClick={() => onRestore(project.id)}>

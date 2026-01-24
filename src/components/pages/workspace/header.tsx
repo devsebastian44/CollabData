@@ -64,7 +64,7 @@ export function WorkspaceHeader() {
                         alt="User profile picture"
                         width={36}
                         height={36}
-                        className="rounded-full ring-2 ring-border-dark"
+                        className="rounded-full object-cover ring-2 ring-border-dark"
                         data-ai-hint={userAvatar.imageHint}
                     />
                   )}
