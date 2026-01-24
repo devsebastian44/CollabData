@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,19 +8,33 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useUser } from '@/firebase';
-import { updateProfile } from 'firebase/auth';
+import { updateProfile, deleteUser } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Camera } from 'lucide-react';
+import { Camera, Trash2 } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useRouter } from 'next/navigation';
 
 export default function SettingsPage() {
     const { user, loading } = useUser();
     const { toast } = useToast();
+    const router = useRouter();
 
     const [displayName, setDisplayName] = useState('');
     const [photoURL, setPhotoURL] = useState('');
     const [isSaving, setIsSaving] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -37,7 +50,6 @@ export default function SettingsPage() {
         try {
             await updateProfile(user, {
                 displayName: displayName,
-                photoURL: photoURL,
             });
             toast({
                 title: 'Profile Updated',
@@ -51,6 +63,28 @@ export default function SettingsPage() {
             });
         } finally {
             setIsSaving(false);
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        if (!user) return;
+        setIsDeleting(true);
+        try {
+            await deleteUser(user);
+            toast({
+                title: 'Account Deleted',
+                description: 'Your account has been permanently deleted.',
+            });
+            router.push('/login');
+        } catch (error: any) {
+            toast({
+                variant: 'destructive',
+                title: 'Error deleting account',
+                description: 'This is a sensitive operation and may require a recent login. Please log out and log in again before retrying.',
+            });
+            console.error(error);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -98,7 +132,7 @@ export default function SettingsPage() {
                 </header>
 
                 <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-                    <div className="max-w-2xl mx-auto">
+                    <div className="max-w-2xl mx-auto space-y-8">
                         <Card className="bg-surface-dark border-border-dark">
                             <CardHeader>
                                 <CardTitle className="text-xl">Profile Settings</CardTitle>
@@ -115,21 +149,11 @@ export default function SettingsPage() {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-white">Profile Picture</h3>
-                                        <p className="text-sm text-text-secondary">PNG, JPG, or GIF.</p>
+                                        <p className="text-sm text-text-secondary">Click the camera to change.</p>
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 gap-6">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="photo-url" className="text-white">Photo URL</Label>
-                                        <Input
-                                            id="photo-url"
-                                            placeholder="https://example.com/photo.jpg"
-                                            className="bg-[#111722] border-border-dark"
-                                            value={photoURL}
-                                            onChange={(e) => setPhotoURL(e.target.value)}
-                                        />
-                                    </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="full-name" className="text-white">Full Name</Label>
                                         <Input
@@ -157,6 +181,47 @@ export default function SettingsPage() {
                                     {isSaving ? 'Saving...' : 'Save Changes'}
                                 </Button>
                             </CardFooter>
+                        </Card>
+                        
+                        <Card className="bg-surface-dark border-destructive/50">
+                            <CardHeader>
+                                <CardTitle className="text-xl text-destructive">Danger Zone</CardTitle>
+                                <CardDescription>These actions are permanent and cannot be undone.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                               <div className="flex justify-between items-center p-4 rounded-lg bg-destructive/10">
+                                  <div>
+                                      <h4 className="font-semibold text-white">Delete Account</h4>
+                                      <p className="text-sm text-destructive/80">Permanently delete your account and all associated data.</p>
+                                  </div>
+                                  <AlertDialog>
+                                      <AlertDialogTrigger asChild>
+                                          <Button variant="destructive">
+                                            <Trash2 className="mr-2 h-4 w-4" />
+                                            Delete Account
+                                          </Button>
+                                      </AlertDialogTrigger>
+                                      <AlertDialogContent>
+                                          <AlertDialogHeader>
+                                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                              <AlertDialogDescription>
+                                                  This action cannot be undone. This will permanently delete your
+                                                  account and remove your data from our servers.
+                                              </AlertDialogDescription>
+                                          </AlertDialogHeader>
+                                          <AlertDialogFooter>
+                                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                              <AlertDialogAction 
+                                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                                onClick={handleDeleteAccount} 
+                                                disabled={isDeleting}>
+                                                  {isDeleting ? 'Deleting...' : 'Continue'}
+                                              </AlertDialogAction>
+                                          </AlertDialogFooter>
+                                      </AlertDialogContent>
+                                  </AlertDialog>
+                               </div>
+                            </CardContent>
                         </Card>
                     </div>
                 </div>
