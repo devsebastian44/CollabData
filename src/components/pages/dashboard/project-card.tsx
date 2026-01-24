@@ -83,24 +83,13 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
             Restore <History size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
           </Button>
         );
-      case 'Processing':
-        return null;
       case 'Error':
         return (
           <Button variant="link" className="text-red-500 p-0 h-auto group/link" onClick={() => console.warn('Retry logic not implemented')}>
             Retry <RefreshCw size={16} className="ml-1" />
           </Button>
         );
-      case 'Review':
-        return (
-          <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
-            <Link href={`/projects/${project.id}/results`}>
-              View Analysis
-              <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
-            </Link>
-          </Button>
-        );
-      default: // Active
+      default: // Active, Processing, Review
         return (
            <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
             <Link href={`/projects/${project.id}/results`}>
