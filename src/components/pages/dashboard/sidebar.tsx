@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Database, ScatterChart, Trash2 } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import Image from 'next/image';
+import { LayoutGrid, Database, ScatterChart, Trash2, Share2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
@@ -15,7 +13,6 @@ const navLinks = [
 ];
 
 export function DashboardSidebar() {
-  const workspaceAvatar = PlaceHolderImages.find(p => p.id === 'workspace-avatar');
   const pathname = usePathname();
   
   return (
@@ -23,16 +20,9 @@ export function DashboardSidebar() {
       <div className="flex h-full flex-col justify-between p-4">
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex gap-3 items-center mb-4 px-2">
-            {workspaceAvatar && (
-                <Image
-                    src={workspaceAvatar.imageUrl}
-                    alt="Abstract blue gradient avatar"
-                    width={40}
-                    height={40}
-                    className="rounded-full shadow-inner"
-                    data-ai-hint={workspaceAvatar.imageHint}
-                />
-            )}
+            <div className="size-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Share2 className="h-6 w-6" />
+            </div>
             <div className="flex flex-col">
               <h1 className="text-white text-base font-medium leading-normal font-headline">CollabData</h1>
               <p className="text-text-secondary text-sm font-normal leading-normal">Pro Workspace</p>
