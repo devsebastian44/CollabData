@@ -46,7 +46,7 @@ export function DashboardSidebar() {
             })}
           </nav>
         </div>
-        <Button asChild className="justify-start gap-3">
+        <Button asChild className="justify-center gap-3">
           <Link href="/dashboard/new-analysis">
             <Plus />
             <span>New Analysis</span>
