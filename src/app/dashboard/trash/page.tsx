@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { UserNav } from '@/components/layout/user-nav';
 
 export default function TrashPage() {
-  const { projects, deleteProject, restoreProject } = useProjectStore();
+  const { projects, deleteProject, restoreProject, renameProject } = useProjectStore();
   
   const archivedProjects = projects.filter(p => p.status === 'Archived');
 
@@ -38,6 +38,7 @@ export default function TrashPage() {
                     onArchive={() => {}} // No-op
                     onDelete={deleteProject} 
                     onRestore={restoreProject} 
+                    onRename={renameProject}
                   />
                 ))}
               </div>

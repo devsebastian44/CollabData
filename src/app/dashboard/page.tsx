@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { UserNav } from '@/components/layout/user-nav';
 
 export default function DashboardPage() {
-  const { projects, archiveProject, restoreProject, deleteProject } = useProjectStore();
+  const { projects, archiveProject, restoreProject, deleteProject, renameProject } = useProjectStore();
 
   return (
     <div className="flex h-screen w-full bg-background-dark">
@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
               {projects.filter(p => p.status !== 'Archived').map(project => (
-                <ProjectCard key={project.id} project={project} onArchive={archiveProject} onDelete={archiveProject} onRestore={restoreProject} />
+                <ProjectCard key={project.id} project={project} onArchive={archiveProject} onDelete={archiveProject} onRestore={restoreProject} onRename={renameProject} />
               ))}
             </div>
           </div>

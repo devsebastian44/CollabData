@@ -69,5 +69,12 @@ export const useProjectStore = () => {
         setProjects(prevProjects => prevProjects.filter(p => p.id !== projectId));
     }, []);
 
-    return { projects, addProject, archiveProject, restoreProject, deleteProject };
+    const renameProject = useCallback((projectId: string, newName: string) => {
+        if (!newName.trim()) return;
+        setProjects(prevProjects =>
+            prevProjects.map(p => (p.id === projectId ? { ...p, name: newName } : p))
+        );
+    }, []);
+
+    return { projects, addProject, archiveProject, restoreProject, deleteProject, renameProject };
 }
