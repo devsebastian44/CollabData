@@ -3,7 +3,7 @@ import { CorrelationHeatmap } from '@/components/pages/results/correlation-heatm
 import { FeatureDistributions } from '@/components/pages/results/feature-distributions';
 import { DescriptiveStatsTable } from '@/components/pages/results/descriptive-stats-table';
 import { AIInsights } from '@/components/pages/results/ai-insights';
-import { Rows, Columns, AlertTriangle, Copy } from 'lucide-react';
+import { Rows, Columns, AlertTriangle, Copy, ChevronRight } from 'lucide-react';
 import { descriptiveStats } from '@/lib/mock-data';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import Link from 'next/link';
@@ -26,7 +26,11 @@ export default function ResultsPage() {
         <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div>
-              <span className="text-white text-lg font-bold leading-normal">Results</span>
+              <div className="flex items-center gap-2 text-lg font-bold leading-normal">
+                <Link href="/dashboard" className="text-text-secondary hover:text-white">Dashboard</Link>
+                <ChevronRight size={20} className="text-text-secondary shrink-0" />
+                <span className="text-white">Customer Churn Analysis - Feb 2024</span>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               {userAvatar && (
