@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Database, ScatterChart, Trash2, Share2 } from 'lucide-react';
+import { LayoutGrid, Database, ScatterChart, Trash2, Share2, Plus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
@@ -48,9 +48,7 @@ export function DashboardSidebar() {
         </div>
         <Button asChild className="justify-start gap-3">
           <Link href="/dashboard/new-analysis">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-700 text-sm font-bold text-white ring-2 ring-slate-500">
-              +
-            </div>
+            <Plus />
             <span>New Analysis</span>
           </Link>
         </Button>
