@@ -133,12 +133,18 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
       <Card className="group flex flex-col gap-4 bg-surface-dark border-border-dark hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200">
         <CardHeader className="pb-2">
             <div className="flex justify-between items-start">
-              <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
-                <Link href={`/projects/${project.id}`}>{project.name}</Link>
-              </CardTitle>
+              <div className="flex-1 min-w-0">
+                <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors pr-8">
+                  <Link href={`/projects/${project.id}`}>{project.name}</Link>
+                </CardTitle>
+                <Badge variant="outline" className={`w-fit flex items-center mt-2 ${statusInfo[project.status]?.style || ''}`}>
+                    {statusInfo[project.status]?.icon}
+                    {project.status}
+                </Badge>
+              </div>
                <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-1.5 -mr-2">
+                  <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white shrink-0 -mt-1">
                     <MoreVertical />
                   </Button>
                 </DropdownMenuTrigger>
@@ -167,10 +173,6 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <Badge variant="outline" className={`w-fit flex items-center ${statusInfo[project.status]?.style || ''}`}>
-                {statusInfo[project.status]?.icon}
-                {project.status}
-            </Badge>
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
           <div className="flex items-center gap-1.5" title="Datasets">
@@ -180,7 +182,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
           {timeAgo && (
             <div className="flex items-center gap-1.5" title="Created">
                 <Clock size={18} className="shrink-0" />
-                <span className="w-28">{timeAgo}</span>
+                <span className="whitespace-nowrap">{timeAgo}</span>
             </div>
           )}
         </CardContent>
