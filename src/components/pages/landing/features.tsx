@@ -59,6 +59,11 @@ export function Features() {
 
   return (
     <section className="py-20 md:py-32 bg-background-light dark:bg-background-dark relative">
+       <div className="absolute bottom-8 left-8 z-10 hidden md:block">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/50 border border-slate-700">
+          <span className="font-bold text-white font-headline">N</span>
+        </div>
+      </div>
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row gap-12 lg:gap-20">
           <div className="md:w-1/3 flex flex-col gap-6 sticky top-24 h-fit">
