@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { Database, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { useAuth, useUser } from '@/firebase';
-import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import {
   DropdownMenu,
@@ -16,15 +14,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button';
 
+const mockUser = {
+    displayName: 'Alex Johnson',
+    email: 'alex.j@example.com',
+    photoURL: PlaceHolderImages.find(p => p.id === 'user-6')?.imageUrl || 'https://picsum.photos/seed/1/36/36'
+}
+
 export function WorkspaceHeader() {
-  const { user } = useUser();
-  const auth = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await signOut(auth);
+    // TODO: Implement Supabase logout
     router.push('/login');
   };
+  
+  const user = mockUser;
   
   const userAvatar = user?.photoURL 
     ? { imageUrl: user.photoURL, imageHint: 'user profile' } 

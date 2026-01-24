@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,15 +11,6 @@ import { GoogleIcon } from '@/components/icons/google-icon';
 import { GithubIcon } from '@/components/icons/github-icon';
 import { Lock, EyeOff, Eye, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useAuth, useUser } from '@/firebase';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup,
-  updateProfile,
-} from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 
 
@@ -37,32 +28,28 @@ export default function LoginPage() {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
 
   const router = useRouter();
-  const auth = useAuth();
-  const { user, loading } = useUser();
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (user && !loading) {
-      router.push('/dashboard');
-    }
-  }, [user, loading, router]);
-
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      router.push('/dashboard');
-    } catch (error: any) {
+    if (!loginEmail || !loginPassword) {
       toast({
         variant: 'destructive',
         title: 'Error al iniciar sesión',
-        description: error.message,
+        description: 'Por favor, ingrese su correo y contraseña.',
       });
+      return;
     }
+    // TODO: Replace with your Supabase login logic
+    console.log('Login attempt with:', { loginEmail, loginPassword });
+    toast({
+      title: 'Inicio de sesión simulado',
+      description: 'Redirigiendo al dashboard...',
+    });
+    router.push('/dashboard');
   };
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
     if (signupPassword !== signupConfirmPassword) {
       toast({
@@ -72,58 +59,38 @@ export default function LoginPage() {
       });
       return;
     }
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
-      if (userCredential.user) {
-        await updateProfile(userCredential.user, {
-            displayName: signupName,
-        });
-      }
-      router.push('/dashboard');
-    } catch (error: any) {
-       toast({
-        variant: 'destructive',
-        title: 'Error al registrarse',
-        description: error.message,
-      });
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-        await signInWithPopup(auth, provider);
-        router.push('/dashboard');
-    } catch (error: any) {
-         toast({
+    if (!signupName || !signupEmail || !signupPassword) {
+        toast({
             variant: 'destructive',
-            title: 'Error con Google',
-            description: error.message,
+            title: 'Error',
+            description: 'Todos los campos son obligatorios.',
         });
+        return;
     }
+    // TODO: Replace with your Supabase sign-up logic
+    console.log('Signup attempt with:', { signupName, signupEmail, signupPassword });
+    toast({
+      title: 'Registro simulado',
+      description: 'Redirigiendo al dashboard...',
+    });
+    router.push('/dashboard');
   };
 
-  const handleGithubSignIn = async () => {
-    const provider = new GithubAuthProvider();
-    try {
-        await signInWithPopup(auth, provider);
-        router.push('/dashboard');
-    } catch (error: any) {
-         toast({
-            variant: 'destructive',
-            title: 'Error con Github',
-            description: error.message,
-        });
-    }
+  const handleGoogleSignIn = () => {
+    // TODO: Implement Supabase Google sign in logic
+    toast({
+      title: 'Próximamente',
+      description: 'La integración con Google se realizará con Supabase.',
+    });
   };
 
-  if(loading || user) {
-    return (
-        <div className="flex h-screen w-full items-center justify-center bg-background-dark">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
-        </div>
-    );
-  }
+  const handleGithubSignIn = () => {
+    // TODO: Implement Supabase GitHub sign in logic
+    toast({
+      title: 'Próximamente',
+      description: 'La integración con GitHub se realizará con Supabase.',
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-200">
