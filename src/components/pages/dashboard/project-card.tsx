@@ -101,7 +101,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore }: Project
                 alt={member.name}
                 width={32}
                 height={32}
-                className="inline-block rounded-full ring-2 ring-background-dark object-cover"
+                className="h-8 w-8 rounded-full ring-2 ring-background-dark object-cover"
                 data-ai-hint="person face"
               />
             ))}
