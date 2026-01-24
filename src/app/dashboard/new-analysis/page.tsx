@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useProjectStore } from '@/hooks/use-project-store';
 import { useToast } from '@/hooks/use-toast';
+import { UserNav } from '@/components/layout/user-nav';
 
 const descriptiveStats = [
   { id: 'mean', label: 'Mean & Median', checked: true },
@@ -32,7 +31,6 @@ const visualizations = [
 ];
 
 export default function NewAnalysisPage() {
-  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
   const router = useRouter();
   const { addProject } = useProjectStore();
   const { toast } = useToast();
@@ -75,20 +73,7 @@ export default function NewAnalysisPage() {
               <span className="text-white text-lg font-bold leading-normal">New Analysis</span>
             </div>
             <div className="flex items-center gap-3">
-              {userAvatar && (
-                <Image
-                    src={userAvatar.imageUrl}
-                    alt="User profile picture"
-                    width={40}
-                    height={40}
-                    className="rounded-full ring-2 ring-primary/20"
-                    data-ai-hint={userAvatar.imageHint}
-                />
-              )}
-              <div className="text-left hidden sm:block">
-                <p className="text-sm text-white font-medium">Alex Johnson</p>
-                <p className="text-xs text-white/50">Data Scientist</p>
-              </div>
+              <UserNav />
             </div>
           </div>
         </header>

@@ -7,8 +7,7 @@ import { Rows, Columns, AlertTriangle, Copy, ChevronRight } from 'lucide-react';
 import { descriptiveStats } from '@/lib/mock-data';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { UserNav } from '@/components/layout/user-nav';
 
 export default function ResultsPage() {
   const kpiData = [
@@ -17,7 +16,6 @@ export default function ResultsPage() {
     { title: 'Missing Values', value: '2.3%', trend: '+0.5%', trendColor: 'text-amber-500', icon: <AlertTriangle className="text-6xl text-amber-500" />, hoverBorder: 'hover:border-amber-500/50' },
     { title: 'Duplicate Rows', value: '4', action: 'Review', icon: <Copy className="text-6xl text-rose-500" />, hoverBorder: 'hover:border-rose-500/50' },
   ];
-  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
 
   return (
     <div className="flex h-screen w-full bg-background-dark">
@@ -33,20 +31,7 @@ export default function ResultsPage() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              {userAvatar && (
-                <Image
-                    src={userAvatar.imageUrl}
-                    alt="User profile picture"
-                    width={40}
-                    height={40}
-                    className="rounded-full ring-2 ring-primary/20"
-                    data-ai-hint={userAvatar.imageHint}
-                />
-              )}
-              <div className="text-left hidden sm:block">
-                <p className="text-sm text-white font-medium">Alex Johnson</p>
-                <p className="text-xs text-white/50">Data Scientist</p>
-              </div>
+              <UserNav />
             </div>
           </div>
         </header>

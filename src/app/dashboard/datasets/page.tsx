@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { files, referenceFiles } from '@/lib/mock-data';
 import type { DatasetFile } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -16,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useRouter } from 'next/navigation';
+import { UserNav } from '@/components/layout/user-nav';
 
 const DatasetItem = ({ file, onDelete }: { file: DatasetFile, onDelete: (name: string) => void }) => {
     const router = useRouter();
@@ -57,7 +56,6 @@ const DatasetItem = ({ file, onDelete }: { file: DatasetFile, onDelete: (name: s
 
 
 export default function DatasetsPage() {
-  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
   const [allFiles, setAllFiles] = useState([...files, ...referenceFiles]);
 
   const handleDeleteFile = (fileName: string) => {
@@ -74,20 +72,7 @@ export default function DatasetsPage() {
               <span className="text-white text-lg font-bold leading-normal">Datasets</span>
             </div>
             <div className="flex items-center gap-3">
-              {userAvatar && (
-                <Image
-                    src={userAvatar.imageUrl}
-                    alt="User profile picture"
-                    width={40}
-                    height={40}
-                    className="rounded-full ring-2 ring-primary/20"
-                    data-ai-hint={userAvatar.imageHint}
-                />
-              )}
-              <div className="text-left hidden sm:block">
-                <p className="text-sm text-white font-medium">Alex Johnson</p>
-                <p className="text-xs text-white/50">Data Scientist</p>
-              </div>
+              <UserNav />
             </div>
           </div>
         </header>

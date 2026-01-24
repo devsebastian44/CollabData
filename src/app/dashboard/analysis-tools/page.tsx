@@ -2,11 +2,9 @@ import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { UserNav } from '@/components/layout/user-nav';
 
 export default function AnalysisToolsPage() {
-  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-6');
   return (
     <div className="flex h-screen w-full bg-background-dark">
       <DashboardSidebar />
@@ -17,20 +15,7 @@ export default function AnalysisToolsPage() {
               <span className="text-white text-lg font-bold leading-normal">Analysis Tools</span>
             </div>
             <div className="flex items-center gap-3">
-              {userAvatar && (
-                <Image
-                    src={userAvatar.imageUrl}
-                    alt="User profile picture"
-                    width={40}
-                    height={40}
-                    className="rounded-full ring-2 ring-primary/20"
-                    data-ai-hint={userAvatar.imageHint}
-                />
-              )}
-              <div className="text-left hidden sm:block">
-                <p className="text-sm text-white font-medium">Alex Johnson</p>
-                <p className="text-xs text-white/50">Data Scientist</p>
-              </div>
+              <UserNav />
             </div>
           </div>
         </header>
