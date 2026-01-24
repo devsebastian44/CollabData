@@ -13,22 +13,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button';
+import { useUser, useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const mockUser = {
-    displayName: 'Alex Johnson',
-    email: 'alex.j@example.com',
-    photoURL: PlaceHolderImages.find(p => p.id === 'user-6')?.imageUrl || 'https://picsum.photos/seed/1/36/36'
-}
 
 export function WorkspaceHeader() {
+  const { user, loading } = useUser();
+  const auth = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
-    // TODO: Implement Supabase logout
+    await signOut(auth);
     router.push('/login');
   };
-  
-  const user = mockUser;
   
   const userAvatar = user?.photoURL 
     ? { imageUrl: user.photoURL, imageHint: 'user profile' } 
@@ -46,12 +44,14 @@ export function WorkspaceHeader() {
       <div className="flex flex-1 justify-end gap-8">
         <nav className="hidden md:flex items-center gap-6">
           <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="/dashboard">Dashboard</Link>
-          <Link className="text-white text-sm font-medium leading-normal" href="/dashboard">Projects</Link>
-          <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Team</Link>
+          <Link className="text-white text-sm font-medium leading-normal" href="/dashboard/datasets">Datasets</Link>
+          <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="/dashboard/analysis-tools">Analysis Tools</Link>
           <Link className="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Settings</Link>
         </nav>
         <div className="flex items-center gap-3 pl-4 border-l border-border-dark">
-           {user && (
+           {loading ? (
+             <Skeleton className="h-9 w-9 rounded-full" />
+           ) : user && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
                <Button variant="ghost" className="flex items-center gap-3 relative h-auto p-0">

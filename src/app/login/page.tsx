@@ -12,13 +12,22 @@ import { GithubIcon } from '@/components/icons/github-icon';
 import { Lock, EyeOff, Eye, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  updateProfile,
+} from 'firebase/auth';
+import { useAuth } from '@/firebase';
 
 export default function LoginPage() {
+  const auth = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [signUpPasswordVisible, setSignUpPasswordVisible] = useState(false);
   const [signUpConfirmPasswordVisible, setSignUpConfirmPasswordVisible] = useState(false);
-  
+
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
@@ -30,7 +39,7 @@ export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!loginEmail || !loginPassword) {
       toast({
@@ -40,16 +49,23 @@ export default function LoginPage() {
       });
       return;
     }
-    // TODO: Replace with your Supabase login logic
-    console.log('Login attempt with:', { loginEmail, loginPassword });
-    toast({
-      title: 'Inicio de sesión simulado',
-      description: 'Redirigiendo al dashboard...',
-    });
-    router.push('/dashboard');
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      toast({
+        title: 'Inicio de sesión exitoso',
+        description: 'Redirigiendo al dashboard...',
+      });
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al iniciar sesión',
+        description: error.message,
+      });
+    }
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (signupPassword !== signupConfirmPassword) {
       toast({
@@ -67,29 +83,49 @@ export default function LoginPage() {
         });
         return;
     }
-    // TODO: Replace with your Supabase sign-up logic
-    console.log('Signup attempt with:', { signupName, signupEmail, signupPassword });
-    toast({
-      title: 'Registro simulado',
-      description: 'Redirigiendo al dashboard...',
-    });
-    router.push('/dashboard');
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
+      await updateProfile(userCredential.user, { displayName: signupName });
+      toast({
+        title: 'Registro exitoso',
+        description: 'Redirigiendo al dashboard...',
+      });
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Error en el registro',
+        description: error.message,
+      });
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    // TODO: Implement Supabase Google sign in logic
-    toast({
-      title: 'Próximamente',
-      description: 'La integración con Google se realizará con Supabase.',
-    });
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al iniciar sesión con Google',
+        description: error.message,
+      });
+    }
   };
 
-  const handleGithubSignIn = () => {
-    // TODO: Implement Supabase GitHub sign in logic
-    toast({
-      title: 'Próximamente',
-      description: 'La integración con GitHub se realizará con Supabase.',
-    });
+  const handleGithubSignIn = async () => {
+    const provider = new GithubAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al iniciar sesión con GitHub',
+        description: error.message,
+      });
+    }
   };
 
   return (

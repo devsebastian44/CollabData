@@ -12,26 +12,35 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { LogOut } from "lucide-react";
-
-const mockUser = {
-    displayName: 'Alex Johnson',
-    email: 'alex.j@example.com',
-    photoURL: PlaceHolderImages.find(p => p.id === 'user-6')?.imageUrl || 'https://picsum.photos/seed/1/40/40'
-}
+import { useUser, useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
+import { Skeleton } from "../ui/skeleton";
 
 export function UserNav() {
+  const { user, loading } = useUser();
+  const auth = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
-    // TODO: Implement Supabase logout
+    await signOut(auth);
     router.push('/login');
   };
-
-  const user = mockUser;
 
   const userAvatar = user?.photoURL 
     ? { imageUrl: user.photoURL, imageHint: 'user profile' } 
     : (PlaceHolderImages.find(p => p.id === 'user-6') || { imageUrl: 'https://picsum.photos/seed/1/40/40', imageHint: 'person professional' });
+
+  if (loading) {
+      return (
+        <div className="flex items-center gap-3">
+            <Skeleton className="h-10 w-10 rounded-full" />
+            <div className="hidden sm:block">
+                <Skeleton className="h-4 w-24 mb-2" />
+                <Skeleton className="h-3 w-32" />
+            </div>
+        </div>
+      )
+  }
 
   if (!user) {
     return null;
