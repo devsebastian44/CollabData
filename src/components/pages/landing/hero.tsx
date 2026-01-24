@@ -30,10 +30,6 @@ export function Hero() {
                   <ArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="h-12 px-8 font-bold text-base bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
-                <PlayCircle className="text-primary" />
-                Watch Demo
-              </Button>
             </div>
             <div className="pt-6 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
               <div className="flex items-center gap-1">
