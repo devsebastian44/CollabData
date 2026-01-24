@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardFooter, CardTitle, CardDescription }
 import { BrandLogo } from '@/components/icons/brand-logo';
 import { GoogleIcon } from '@/components/icons/google-icon';
 import { GithubIcon } from '@/components/icons/github-icon';
-import { Lock, EyeOff, Eye, User } from 'lucide-react';
+import { Lock, EyeOff, Eye, User, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -130,6 +130,12 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-200">
+      <Link href="/" passHref>
+        <Button variant="ghost" className="absolute top-8 left-8 z-20">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Button>
+      </Link>
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[100px]"></div>
