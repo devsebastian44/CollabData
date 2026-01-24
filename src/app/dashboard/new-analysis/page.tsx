@@ -71,9 +71,7 @@ export default function NewAnalysisPage() {
       <main className="flex-1 flex flex-col h-full overflow-hidden relative">
         <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <Link href="/dashboard" className="text-text-secondary text-sm font-medium leading-normal hover:text-white transition-colors">Dashboard</Link>
-              <span className="text-text-secondary text-sm font-medium leading-normal">/</span>
+            <div>
               <span className="text-white text-lg font-bold leading-normal">New Analysis</span>
             </div>
             <div className="flex items-center gap-3">
@@ -157,7 +155,7 @@ export default function NewAnalysisPage() {
                                         <span className="font-semibold text-primary">
                                             Click to upload
                                         </span>
-                                         {' '}or drag and drop
+                                         or drag and drop
                                     </p>
                                     <p className="text-xs text-slate-500">CSV, XLSX, JSON up to 200MB</p>
                                     {uploadedFile && (
