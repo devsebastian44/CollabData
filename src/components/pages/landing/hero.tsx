@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, PlayCircle } from 'lucide-react';
+import { HeroChart } from '@/components/pages/landing/hero-chart';
 
 export function Hero() {
   return (
@@ -50,56 +51,8 @@ export function Hero() {
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 <div className="ml-4 w-64 h-6 rounded bg-slate-700/50"></div>
               </div>
-              <div className="p-6 grid grid-cols-3 gap-4 h-full bg-[#0f172a]">
-                <div className="col-span-1 flex flex-col gap-3">
-                  <div className="h-8 w-3/4 bg-slate-700 rounded animate-pulse"></div>
-                  <div className="h-4 w-1/2 bg-slate-800 rounded"></div>
-                  <div className="h-4 w-2/3 bg-slate-800 rounded"></div>
-                  <div className="h-4 w-1/2 bg-slate-800 rounded"></div>
-                  <div className="mt-4 h-32 w-full bg-slate-800/50 rounded border border-slate-700 p-2">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-accent-teal"></div>
-                      <div className="text-xs text-slate-400">Active Users</div>
-                    </div>
-                    <div className="h-16 w-full flex items-end justify-between gap-1">
-                      <div className="w-full bg-primary/20 h-[40%] rounded-t-sm"></div>
-                      <div className="w-full bg-primary/40 h-[70%] rounded-t-sm"></div>
-                      <div className="w-full bg-primary/60 h-[50%] rounded-t-sm"></div>
-                      <div className="w-full bg-primary h-[85%] rounded-t-sm"></div>
-                      <div className="w-full bg-primary/50 h-[60%] rounded-t-sm"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-span-2 flex flex-col gap-4">
-                  <div className="flex justify-between items-center">
-                    <div className="h-8 w-1/3 bg-slate-700 rounded"></div>
-                    <div className="flex gap-2">
-                      <div className="h-8 w-8 bg-primary rounded"></div>
-                      <div className="h-8 w-8 bg-slate-700 rounded"></div>
-                    </div>
-                  </div>
-                  <div className="grow w-full bg-slate-800/30 rounded border border-slate-700 relative overflow-hidden">
-                    <svg className="absolute inset-0 w-full h-full text-primary" preserveAspectRatio="none">
-                      <path d="M0,150 C50,120 100,160 150,100 C200,40 250,80 300,50 C350,20 400,60 450,90 C500,120 550,80 600,100 L600,200 L0,200 Z" fill="url(#gradient-primary)" opacity="0.2"></path>
-                      <path d="M0,150 C50,120 100,160 150,100 C200,40 250,80 300,50 C350,20 400,60 450,90 C500,120 550,80 600,100" fill="none" stroke="currentColor" strokeWidth="3"></path>
-                      <defs>
-                        <linearGradient id="gradient-primary" x1="0%" x2="0%" y1="0%" y2="100%">
-                          <stop offset="0%" style={{ stopColor: "currentColor", stopOpacity: 1 }}></stop>
-                          <stop offset="100%" style={{ stopColor: "currentColor", stopOpacity: 0 }}></stop>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div className="absolute top-[25%] left-[50%] w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] border-2 border-primary"></div>
-                    <div className="absolute top-[15%] left-[50%] bg-slate-800 text-white text-xs px-2 py-1 rounded border border-slate-600 shadow-lg transform -translate-x-1/2 mb-2">
-                      $42,593.00
-                    </div>
-                  </div>
-                  <div className="h-12 w-full flex gap-2">
-                    <div className="h-full flex-1 bg-slate-800/50 rounded border border-slate-700"></div>
-                    <div className="h-full flex-1 bg-slate-800/50 rounded border border-slate-700"></div>
-                    <div className="h-full flex-1 bg-slate-800/50 rounded border border-slate-700"></div>
-                  </div>
-                </div>
+              <div className="p-4 h-[calc(100%-2.5rem)] bg-[#0f172a]">
+                <HeroChart />
               </div>
             </div>
             <div className="absolute -inset-4 bg-primary/20 blur-2xl -z-10 rounded-[30px]"></div>
