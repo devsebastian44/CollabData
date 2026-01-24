@@ -40,11 +40,10 @@ export function DashboardSidebar() {
           </Link>
           <nav className="flex flex-col gap-2">
             {navLinks.map(link => {
-              const isDashboardActive = link.href === '/dashboard' && pathname === '/dashboard';
-              const isDatasetsSection = link.text === 'Datasets' && (pathname.startsWith('/dashboard/datasets') || pathname.startsWith('/projects'));
-              const isOtherPageActive = link.href !== '/dashboard' && link.text !== 'Datasets' && pathname.startsWith(link.href);
+              const isDashboardActive = link.href === '/dashboard' && (pathname === '/dashboard' || pathname.startsWith('/projects'));
+              const isOtherPageActive = link.href !== '/dashboard' && pathname.startsWith(link.href);
 
-              const isActive = isDashboardActive || isDatasetsSection || isOtherPageActive;
+              const isActive = isDashboardActive || isOtherPageActive;
 
               return (
                 <Link key={link.text} href={link.href} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
@@ -57,8 +56,13 @@ export function DashboardSidebar() {
             })}
           </nav>
         </div>
-        <Button asChild>
-          <Link href="/dashboard/new-analysis">New Analysis</Link>
+        <Button asChild className="justify-start gap-3">
+          <Link href="/dashboard/new-analysis">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-700 text-sm font-bold text-white ring-2 ring-slate-500">
+              N
+            </div>
+            <span>New Analysis</span>
+          </Link>
         </Button>
       </div>
     </aside>
