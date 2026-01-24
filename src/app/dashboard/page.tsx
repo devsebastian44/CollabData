@@ -22,7 +22,7 @@ export default function DashboardPage() {
         <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <span className="text-white text-lg font-bold leading-normal">Projects</span>
+              <span className="text-white text-lg font-bold leading-normal">Dashboard</span>
             </div>
             <div className="flex items-center gap-3">
               {userAvatar && (

@@ -14,7 +14,7 @@ export default function AnalysisToolsPage() {
         <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-2">
-              <Link href="/dashboard" className="text-text-secondary text-sm font-medium leading-normal hover:text-white transition-colors">Projects</Link>
+              <Link href="/dashboard" className="text-text-secondary text-sm font-medium leading-normal hover:text-white transition-colors">Dashboard</Link>
               <span className="text-text-secondary text-sm font-medium leading-normal">/</span>
               <span className="text-white text-lg font-bold leading-normal">Analysis Tools</span>
             </div>
