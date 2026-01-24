@@ -104,7 +104,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
         return (
            <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
             <Link href={`/projects/${project.id}/results`}>
-              Run EDA
+              View Analysis
               <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
             </Link>
           </Button>
@@ -151,7 +151,13 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
+            <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>
+              {project.status === 'Processing' ? (
+                <><Loader2 size={12} className="animate-spin mr-1.5" /> {project.status}</>
+              ) : (
+                project.status
+              )}
+            </Badge>
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
           <div className="flex items-center gap-1.5" title="Datasets">
