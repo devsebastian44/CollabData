@@ -14,7 +14,9 @@ import {
   Edit,
   Archive,
   Trash2,
-  PenLine
+  PenLine,
+  Loader2,
+  RefreshCw,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,6 +38,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatDistanceToNow } from 'date-fns';
 
 
 type ProjectCardProps = {
@@ -51,6 +54,7 @@ const statusStyles: { [key: string]: string } = {
   Processing: 'bg-amber-400/10 text-amber-400 ring-amber-400/20',
   Archived: 'bg-slate-400/10 text-slate-400 ring-slate-400/20',
   Review: 'bg-purple-400/10 text-purple-400 ring-purple-400/20',
+  Error: 'bg-red-500/10 text-red-500 ring-red-500/20',
 };
 
 export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename }: ProjectCardProps) {
@@ -66,55 +70,98 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
   const displayedMembers = project.members.slice(0, 3);
   const remainingMembers = project.members.length - displayedMembers.length;
 
+  const timeAgo = formatDistanceToNow(new Date(project.createdAt), { addSuffix: true });
+
+  const renderFooterAction = () => {
+    switch (project.status) {
+      case 'Archived':
+        return (
+          <Button variant="link" className="text-primary p-0 h-auto group/link" onClick={() => onRestore(project.id)}>
+            Restore <History size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
+          </Button>
+        );
+      case 'Processing':
+        return (
+          <Button variant="link" className="text-amber-400 p-0 h-auto" disabled>
+            Processing... <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+          </Button>
+        );
+      case 'Error':
+        return (
+          <Button variant="link" className="text-red-500 p-0 h-auto group/link" onClick={() => console.warn('Retry logic not implemented')}>
+            Retry <RefreshCw size={16} className="ml-1" />
+          </Button>
+        );
+      case 'Review':
+        return (
+          <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
+            <Link href={`/projects/${project.id}/results`}>
+              View Analysis
+              <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
+            </Link>
+          </Button>
+        );
+      default: // Active
+        return (
+           <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
+            <Link href={`/projects/${project.id}/results`}>
+              Run EDA
+              <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
+            </Link>
+          </Button>
+        );
+    }
+  };
+
   return (
     <>
       <Card className="group flex flex-col gap-4 bg-surface-dark border-border-dark hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200">
         <CardHeader className="pb-2">
-          <div className="flex justify-between items-start">
-            <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
-              <Link href={`/projects/${project.id}`}>{project.name}</Link>
-            </CardTitle>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-2">
-                  <MoreVertical />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
-                  <ArrowRight className="mr-2 h-4 w-4" />
-                  <span>View Analysis</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
-                  <Edit className="mr-2 h-4 w-4" />
-                  <span>Open Workspace</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
-                  <PenLine className="mr-2 h-4 w-4" />
-                  <span>Rename</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => onArchive(project.id)}>
-                  <Archive className="mr-2 h-4 w-4" />
-                  <span>Archive</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  <span>Delete</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
+            <div className="flex justify-between items-start">
+              <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
+                <Link href={`/projects/${project.id}`}>{project.name}</Link>
+              </CardTitle>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-1.5 -mr-2">
+                    <MoreVertical />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
+                    <ArrowRight className="mr-2 h-4 w-4" />
+                    <span>View Analysis</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    <span>Open Workspace</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
+                    <PenLine className="mr-2 h-4 w-4" />
+                    <span>Rename</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => onArchive(project.id)}>
+                    <Archive className="mr-2 h-4 w-4" />
+                    <span>Archive</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    <span>Delete</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>{project.status}</Badge>
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
           <div className="flex items-center gap-1.5" title="Datasets">
             <DatabaseIcon size={18} />
-            <span>{project.datasetCount} Datasets</span>
+            <span>{project.datasetCount} {project.datasetCount === 1 ? 'Dataset' : 'Datasets'}</span>
           </div>
           <div className="flex items-center gap-1.5" title="Last Active">
             <Clock size={18} />
-            <span>{project.lastActive}</span>
+            <span>{timeAgo}</span>
           </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between pt-2">
@@ -141,18 +188,8 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
             <div />
           )}
           
-          {project.status === 'Archived' ? (
-            <Button variant="link" className="text-primary p-0 h-auto group/link" onClick={() => onRestore(project.id)}>
-              Restore <History size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
-            </Button>
-          ) : (
-            <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
-              <Link href={`/projects/${project.id}/results`}>
-                {project.status === 'Processing' ? 'View Analysis' : 'Run EDA'}
-                <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
-              </Link>
-            </Button>
-          )}
+          {renderFooterAction()}
+
         </CardFooter>
       </Card>
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>

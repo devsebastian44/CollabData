@@ -53,7 +53,7 @@ export default function NewAnalysisPage() {
       return;
     }
     
-    addProject(analysisName);
+    addProject(analysisName, !!uploadedFile);
     
     toast({
         title: 'Analysis Created',

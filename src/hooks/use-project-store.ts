@@ -40,17 +40,31 @@ export const useProjectStore = () => {
         }
     }, [projects, isInitialized]);
 
-    const addProject = useCallback((projectName: string) => {
+    const addProject = useCallback((projectName: string, hasFile: boolean) => {
         if (!projectName) return;
         const newProject: Project = {
             id: new Date().getTime().toString(),
             name: projectName,
             status: 'Processing',
-            datasetCount: 1,
-            lastActive: 'Just now',
+            datasetCount: hasFile ? 1 : 0,
+            createdAt: Date.now(),
             members: [users.user1, users.user2],
         };
         setProjects(prevProjects => [newProject, ...prevProjects]);
+        
+        // Simulate processing
+        setTimeout(() => {
+            setProjects(prevProjects =>
+                prevProjects.map(p => {
+                    if (p.id === newProject.id) {
+                        // Randomly succeed or fail
+                        const newStatus = Math.random() > 0.3 ? 'Active' : 'Error';
+                        return { ...p, status: newStatus };
+                    }
+                    return p;
+                })
+            );
+        }, 5000); // 5 seconds delay
     }, []);
 
     const archiveProject = useCallback((projectId: string) => {

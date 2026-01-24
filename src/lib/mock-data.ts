@@ -17,7 +17,7 @@ export const projects: Project[] = [
     name: 'Customer Churn Analysis Q3',
     status: 'Active',
     datasetCount: 12,
-    lastActive: '2h ago',
+    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).getTime(), // 2 hours ago
     members: [users.user1, users.user2, users.user3],
   },
   {
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     name: 'Supply Chain Optimization',
     status: 'Processing',
     datasetCount: 18,
-    lastActive: 'Yesterday',
+    createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).getTime(), // Yesterday
     members: [users.user4],
   },
   {
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     name: 'Marketing ROI - Exploratory',
     status: 'Archived',
     datasetCount: 1,
-    lastActive: 'Oct 24',
+    createdAt: new Date('2023-10-24').getTime(),
     members: [users.user5, users.user1],
   },
   {
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     name: 'Financial Forecasting 2024',
     status: 'Active',
     datasetCount: 8,
-    lastActive: '5m ago',
+    createdAt: new Date(Date.now() - 5 * 60 * 1000).getTime(), // 5 minutes ago
     members: [users.user4, users.user2, users.user5, users.user1, users.user3],
   },
   {
@@ -49,8 +49,16 @@ export const projects: Project[] = [
     name: 'User Behavior Segmentation',
     status: 'Review',
     datasetCount: 3,
-    lastActive: '3d ago',
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).getTime(), // 3 days ago
     members: [users.user5],
+  },
+  {
+    id: '6',
+    name: 'Q4 Sales Report',
+    status: 'Error',
+    datasetCount: 5,
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).getTime(), // 2 days ago
+    members: [users.user2, users.user3],
   },
 ];
 
