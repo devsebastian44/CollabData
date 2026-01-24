@@ -57,7 +57,7 @@ export function UserNav() {
                     alt="User profile picture"
                     width={40}
                     height={40}
-                    className="rounded-full object-cover ring-2 ring-primary/20"
+                    className="rounded-full object-cover ring-2 ring-primary/20 aspect-square"
                     data-ai-hint={userAvatar.imageHint || 'user'}
                 />
               )}
