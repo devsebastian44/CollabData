@@ -17,6 +17,8 @@ import {
   PenLine,
   Loader2,
   RefreshCw,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,13 +51,29 @@ type ProjectCardProps = {
   onRename: (projectId: string, newName: string) => void;
 };
 
-const statusStyles: { [key: string]: string } = {
-  Active: 'bg-emerald-400/10 text-emerald-400 ring-emerald-400/20',
-  Processing: 'bg-amber-400/10 text-amber-400 ring-amber-400/20',
-  Archived: 'bg-slate-400/10 text-slate-400 ring-slate-400/20',
-  Review: 'bg-purple-400/10 text-purple-400 ring-purple-400/20',
-  Error: 'bg-red-500/10 text-red-500 ring-red-500/20',
+const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = {
+  Active: { 
+      style: 'bg-emerald-400/10 text-emerald-400 ring-emerald-400/20',
+      icon: <CheckCircle2 size={12} className="mr-1.5" />
+  },
+  Processing: {
+      style: 'bg-amber-400/10 text-amber-400 ring-amber-400/20',
+      icon: <Loader2 size={12} className="animate-spin mr-1.5" />
+  },
+  Archived: { 
+      style: 'bg-slate-400/10 text-slate-400 ring-slate-400/20',
+      icon: <Archive size={12} className="mr-1.5" />
+  },
+  Review: { 
+      style: 'bg-purple-400/10 text-purple-400 ring-purple-400/20',
+      icon: <Edit size={12} className="mr-1.5" />
+  },
+  Error: { 
+      style: 'bg-red-500/10 text-red-500 ring-red-500/20',
+      icon: <AlertCircle size={12} className="mr-1.5" />
+  },
 };
+
 
 export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename }: ProjectCardProps) {
   const router = useRouter();
@@ -89,7 +107,16 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
             Retry <RefreshCw size={16} className="ml-1" />
           </Button>
         );
-      default: // Active, Processing, Review
+      case 'Processing':
+         return (
+           <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
+            <Link href={`/projects/${project.id}/results`}>
+              View Analysis
+              <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
+            </Link>
+          </Button>
+        );
+      default: // Active, Review
         return (
            <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
             <Link href={`/projects/${project.id}/results`}>
@@ -140,12 +167,9 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <Badge variant="outline" className={`w-fit ${statusStyles[project.status]}`}>
-              {project.status === 'Processing' ? (
-                <><Loader2 size={12} className="animate-spin mr-1.5" /> {project.status}</>
-              ) : (
-                project.status
-              )}
+            <Badge variant="outline" className={`w-fit flex items-center ${statusInfo[project.status]?.style || ''}`}>
+                {statusInfo[project.status]?.icon}
+                {project.status}
             </Badge>
         </CardHeader>
         <CardContent className="flex items-center gap-4 text-text-secondary text-sm pt-0 pb-2">
