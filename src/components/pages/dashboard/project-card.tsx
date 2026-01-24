@@ -78,7 +78,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mr-2 -mt-2">
+              <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mr-2">
                 <MoreVertical />
               </Button>
             </DropdownMenuTrigger>
