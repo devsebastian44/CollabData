@@ -70,7 +70,10 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
   const displayedMembers = project.members.slice(0, 3);
   const remainingMembers = project.members.length - displayedMembers.length;
 
-  const timeAgo = project.createdAt ? formatDistanceToNow(new Date(project.createdAt), { addSuffix: true }) : "";
+  const safeDate = project.createdAt ? new Date(project.createdAt) : null;
+  const timeAgo = safeDate && !isNaN(safeDate.getTime())
+    ? formatDistanceToNow(safeDate, { addSuffix: true })
+    : "";
 
   const renderFooterAction = () => {
     switch (project.status) {
@@ -81,11 +84,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
           </Button>
         );
       case 'Processing':
-        return (
-          <div className="flex items-center gap-2 text-sm text-amber-400">
-            Processing... <Loader2 className="ml-2 h-4 w-4 animate-spin" />
-          </div>
-        );
+        return null;
       case 'Error':
         return (
           <Button variant="link" className="text-red-500 p-0 h-auto group/link" onClick={() => console.warn('Retry logic not implemented')}>
