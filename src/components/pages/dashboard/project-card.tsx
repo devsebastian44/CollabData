@@ -61,13 +61,13 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore }: Project
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
+            <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
               <ArrowRight className="mr-2 h-4 w-4" />
-              <span>View Project</span>
+              <span>View Analysis</span>
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
               <Edit className="mr-2 h-4 w-4" />
-              <span>Edit</span>
+              <span>Open Workspace</span>
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => onArchive(project.id)}>
               <Archive className="mr-2 h-4 w-4" />
@@ -117,8 +117,8 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore }: Project
           </Button>
         ) : (
           <Button variant="link" className="text-primary p-0 h-auto group/link" asChild>
-            <Link href={project.status === 'Processing' ? `/projects/${project.id}` : `/projects/${project.id}/results`}>
-              {project.status === 'Processing' ? 'View Project' : 'Run EDA'}
+            <Link href={`/projects/${project.id}/results`}>
+              {project.status === 'Processing' ? 'View Analysis' : 'Run EDA'}
               <ArrowRight size={16} className="ml-1 group-hover/link:translate-x-0.5 transition-transform" />
             </Link>
           </Button>
