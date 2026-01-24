@@ -49,7 +49,7 @@ export function DashboardSidebar() {
         <Button asChild className="justify-start gap-3">
           <Link href="/dashboard/new-analysis">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-700 text-sm font-bold text-white ring-2 ring-slate-500">
-              N
+              +
             </div>
             <span>New Analysis</span>
           </Link>
