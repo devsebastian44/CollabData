@@ -70,7 +70,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
   const displayedMembers = project.members.slice(0, 3);
   const remainingMembers = project.members.length - displayedMembers.length;
 
-  const timeAgo = formatDistanceToNow(new Date(project.createdAt), { addSuffix: true });
+  const timeAgo = project.createdAt ? formatDistanceToNow(new Date(project.createdAt), { addSuffix: true }) : "";
 
   const renderFooterAction = () => {
     switch (project.status) {
@@ -121,7 +121,7 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
               <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
                 <Link href={`/projects/${project.id}`}>{project.name}</Link>
               </CardTitle>
-              <DropdownMenu>
+               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white -mt-1.5 -mr-2">
                     <MoreVertical />
@@ -159,10 +159,12 @@ export function ProjectCard({ project, onArchive, onDelete, onRestore, onRename 
             <DatabaseIcon size={18} />
             <span>{project.datasetCount} {project.datasetCount === 1 ? 'Dataset' : 'Datasets'}</span>
           </div>
-          <div className="flex items-center gap-1.5" title="Last Active">
-            <Clock size={18} />
-            <span>{timeAgo}</span>
-          </div>
+          {timeAgo && (
+            <div className="flex items-center gap-1.5" title="Last Active">
+                <Clock size={18} />
+                <span>{timeAgo}</span>
+            </div>
+          )}
         </CardContent>
         <CardFooter className="flex items-center justify-between pt-2">
           {project.members.length > 1 ? (
