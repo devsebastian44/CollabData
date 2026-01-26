@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 export function DeveloperSection() {
   return (
     <section className="py-20 md:py-32 bg-[#0f172a] border-y border-border">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-5 gap-12 lg:gap-20 items-center">
           
           <div className="md:col-span-3 bg-white dark:bg-background-dark border border-slate-200 dark:border-border-dark rounded-xl shadow-lg">
@@ -18,13 +18,13 @@ export function DeveloperSection() {
                 </div>
             </div>
             <div className="p-4">
-                <pre className="bg-slate-100 dark:bg-[#0f172a] p-4 rounded-md text-sm text-slate-300 overflow-x-auto custom-scrollbar">
-                  <code className="font-mono whitespace-pre text-left">
+                <pre className="bg-slate-100 dark:bg-[#0f172a] p-4 rounded-md text-sm text-slate-300">
+                  <code className="font-mono whitespace-pre-wrap text-left">
                     <span className="text-chart-4">import</span> collabdata <span className="text-chart-4">as</span> cd
                     <br /><br />
                     <span className="text-muted-foreground"># Initialize project</span>
                     <br />
-                    <span className="text-foreground">project</span> <span className="text-muted-foreground">=</span> <span className="text-foreground">cd</span><span className="text-muted-foreground">.</span><span className="text-chart-3">connect</span><span className="text-muted-foreground">(</span><span className="text-chart-2">"marketing_q3"</span><span className="text-muted-foreground">)</span>
+                    <span className="text-foreground">project</span> <span className="text-muted-foreground">=</span> <span className="text-chart-3">cd</span><span className="text-muted-foreground">.</span><span className="text-chart-3">connect</span><span className="text-muted-foreground">(</span><span className="text-chart-2">"marketing_q3"</span><span className="text-muted-foreground">)</span>
                     <br /><br />
                     <span className="text-muted-foreground"># Auto-clean dataset</span>
                     <br />
@@ -43,9 +43,6 @@ export function DeveloperSection() {
           </div>
           
           <div className="md:col-span-2 max-w-md">
-            <div className="inline-flex size-12 items-center justify-center mb-6 rounded-lg bg-surface-dark border border-border-dark">
-                <span className="font-mono text-xl text-slate-400">&gt;_</span>
-            </div>
             <h2 className="text-3xl md:text-4xl font-black leading-tight font-headline">
               Developer First API
             </h2>
