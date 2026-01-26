@@ -10,23 +10,19 @@ export const FirebaseProvider = ({
     value,
 }: {
     children: ReactNode;
-    value: FirebaseInstances;
+    value: FirebaseInstances | null;
 }) => {
     return <FirebaseContext.Provider value={value}>{children}</FirebaseContext.Provider>;
 };
 
 export const useFirebase = () => {
-    const context = useContext(FirebaseContext);
-    if (context === null) {
-        throw new Error('useFirebase must be used within a FirebaseProvider');
-    }
-    return context;
+    return useContext(FirebaseContext);
 };
 
 export const useAuth = () => {
-    return useFirebase().auth;
+    return useFirebase()?.auth;
 };
 
 export const useFirestore = () => {
-    return useFirebase().firestore;
+    return useFirebase()?.firestore;
 };

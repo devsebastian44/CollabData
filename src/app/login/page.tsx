@@ -41,6 +41,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!auth) return;
     if (!loginEmail || !loginPassword) {
       toast({
         variant: 'destructive',
@@ -67,6 +68,7 @@ export default function LoginPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!auth) return;
     if (signupPassword !== signupConfirmPassword) {
       toast({
         variant: 'destructive',
@@ -101,6 +103,7 @@ export default function LoginPage() {
   };
 
   const handleGoogleSignIn = async () => {
+    if (!auth) return;
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
@@ -115,6 +118,7 @@ export default function LoginPage() {
   };
 
   const handleGithubSignIn = async () => {
+    if (!auth) return;
     const provider = new GithubAuthProvider();
     try {
       await signInWithPopup(auth, provider);
