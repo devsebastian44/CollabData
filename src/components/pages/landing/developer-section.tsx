@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export function DeveloperSection() {
   return (
-    <section className="py-20 md:py-32 bg-[#0f172a] border-y border-border">
+    <section className="py-16 md:py-24 bg-[#0f172a] border-y border-border">
       <div className="max-w-5xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           
