@@ -14,13 +14,13 @@ export function MainFooter() {
   return (
     <footer className="bg-white dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-800 py-12 md:py-16">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
-          <div className="col-span-2 lg:col-span-2 pr-8">
+        <div className="flex flex-wrap justify-between gap-8 mb-12">
+          <div className="pr-8">
             <div className="flex items-center gap-2 mb-4">
               <Share2 className="text-primary text-2xl" />
               <span className="text-lg font-bold font-headline">CollabData</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
               The collaborative platform for modern data teams. Automate EDA, manage datasets, and share insights in real-time.
             </p>
             <div className="flex gap-4">
