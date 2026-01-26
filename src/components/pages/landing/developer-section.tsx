@@ -3,22 +3,8 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 export function DeveloperSection() {
-  const codeSnippet = 
-`import collabdata as cd
-
-# Initialize project
-project = cd.connect("marketing_q3")
-
-# Auto-clean dataset
-df = project.load_data()
-df.clean(strategy="aggressive")
-
-# Generate insights
-insights = df.get_correlations(target="conversion_rate")
-cd.publish(insights, channel="slack")`.trim();
-
   return (
-    <section className="py-20 md:py-32 bg-background-light dark:bg-[#0f172a] border-y border-border">
+    <section className="py-20 md:py-32 bg-[#0f172a] border-y border-border">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           
@@ -32,9 +18,25 @@ cd.publish(insights, channel="slack")`.trim();
                 </div>
             </div>
             <div className="p-4">
-                <pre className="bg-slate-100 dark:bg-[#0f172a] p-4 rounded-md text-sm text-slate-800 dark:text-slate-200 overflow-x-auto custom-scrollbar">
-                  <code className="font-mono whitespace-pre">
-                    {codeSnippet}
+                <pre className="bg-slate-100 dark:bg-[#0f172a] p-4 rounded-md text-sm text-slate-300 overflow-x-auto custom-scrollbar">
+                  <code className="font-mono whitespace-pre text-left">
+                    <span className="text-chart-4">import</span> collabdata <span className="text-chart-4">as</span> cd
+                    <br /><br />
+                    <span className="text-muted-foreground"># Initialize project</span>
+                    <br />
+                    <span className="text-foreground">project</span> <span className="text-muted-foreground">=</span> <span className="text-foreground">cd</span><span className="text-muted-foreground">.</span><span className="text-chart-3">connect</span><span className="text-muted-foreground">(</span><span className="text-chart-2">"marketing_q3"</span><span className="text-muted-foreground">)</span>
+                    <br /><br />
+                    <span className="text-muted-foreground"># Auto-clean dataset</span>
+                    <br />
+                    <span className="text-foreground">df</span> <span className="text-muted-foreground">=</span> <span className="text-foreground">project</span><span className="text-muted-foreground">.</span><span className="text-chart-3">load_data</span><span className="text-muted-foreground">()</span>
+                    <br />
+                    <span className="text-foreground">df</span><span className="text-muted-foreground">.</span><span className="text-chart-3">clean</span><span className="text-muted-foreground">(</span><span className="text-chart-1">strategy</span><span className="text-muted-foreground">=</span><span className="text-chart-2">"aggressive"</span><span className="text-muted-foreground">)</span>
+                    <br /><br />
+                    <span className="text-muted-foreground"># Generate insights</span>
+                    <br />
+                    <span className="text-foreground">insights</span> <span className="text-muted-foreground">=</span> <span className="text-foreground">df</span><span className="text-muted-foreground">.</span><span className="text-chart-3">get_correlations</span><span className="text-muted-foreground">(</span><span className="text-chart-1">target</span><span className="text-muted-foreground">=</span><span className="text-chart-2">"conversion_rate"</span><span className="text-muted-foreground">)</span>
+                    <br />
+                    <span className="text-foreground">cd</span><span className="text-muted-foreground">.</span><span className="text-chart-3">publish</span><span className="text-muted-foreground">(</span><span className="text-foreground">insights</span><span className="text-muted-foreground">, </span><span className="text-chart-1">channel</span><span className="text-muted-foreground">=</span><span className="text-chart-2">"slack"</span><span className="text-muted-foreground">)</span>
                   </code>
                 </pre>
             </div>
