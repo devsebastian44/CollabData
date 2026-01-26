@@ -9,10 +9,6 @@ export function MainFooter() {
       title: 'Resources',
       links: ['Documentation', 'API Reference'],
     },
-    {
-      title: 'Company',
-      links: ['About'],
-    },
   ];
 
   return (
