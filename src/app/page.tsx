@@ -5,6 +5,7 @@ import { SocialProof } from '@/components/pages/landing/social-proof';
 import { Features } from '@/components/pages/landing/features';
 import { Cta } from '@/components/pages/landing/cta';
 import { ContactForm } from '@/components/pages/landing/contact-form';
+import { DeveloperSection } from '@/components/pages/landing/developer-section';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <SocialProof />
         <Features />
+        <DeveloperSection />
         <Cta />
         <ContactForm />
       </main>
