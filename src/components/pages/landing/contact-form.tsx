@@ -35,9 +35,9 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-20 bg-background-light dark:bg-[#0b1019]">
+    <section className="py-20 bg-background-light dark:bg-background-dark">
       <div className="max-w-2xl mx-auto px-4">
-        <Card className="bg-white dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 shadow-xl">
+        <Card className="bg-white dark:bg-surface-dark border-slate-200 dark:border-border-dark shadow-xl">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold font-headline">Contact Us</CardTitle>
             <CardDescription>Have a question or want to learn more? Drop us a line.</CardDescription>
