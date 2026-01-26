@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -197,7 +198,7 @@ export default function SettingsPage() {
                             </CardHeader>
                             <CardContent>
                                <div className="flex justify-between items-center p-4 rounded-lg bg-destructive/10">
-                                  <div>
+                                  <div className="pr-6">
                                       <h4 className="font-semibold text-white">Delete Account</h4>
                                       <p className="text-sm text-text-secondary">Permanently delete your account and all associated data.</p>
                                   </div>
