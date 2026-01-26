@@ -1,65 +1,96 @@
-# CollabData - Plataforma Colaborativa de Ingeniería de Datos
+# CollabData - Collaborative Data Engineering Platform
 
-Esta es una aplicación de Next.js creada con Firebase Studio. Es una plataforma diseñada para que los equipos de datos colaboren en la ingeniería y análisis de datos.
+This is a Next.js application built with Firebase Studio. It's a platform designed for data teams to collaborate on data engineering and analysis.
 
-## Descripción del Proyecto
+## Project Description
 
-CollabData es una plataforma web que permite a los usuarios gestionar proyectos de análisis de datos, subir datasets, ejecutar análisis automatizados y visualizar los resultados. La aplicación está construida con un enfoque en la colaboración en tiempo real y la eficiencia del flujo de trabajo.
+CollabData is a web platform that enables users to manage data analysis projects, upload datasets, run automated analyses, and visualize the results. The application is built with a focus on real-time collaboration and workflow efficiency.
 
-## Características Clave
+## Key Features
 
-*   **Autenticación de Usuarios:** Sistema completo de inicio de sesión, registro y autenticación social con Google y GitHub.
-*   **Dashboard de Proyectos:** Un panel central para ver, buscar, filtrar y gestionar todos los proyectos de análisis.
-*   **Creación de Nuevos Análisis:** Un flujo de trabajo guiado para crear nuevos proyectos de análisis, configurar herramientas y subir datasets.
-*   **Visualización de Resultados:** Paneles de resultados dinámicos con KPIs, gráficos, tablas de estadísticas descriptivas y perspectivas generadas por IA.
-*   **Espacio de Trabajo Interactivo:** Un espacio de trabajo para explorar archivos de datos en un entorno similar a un IDE.
-*   **Gestión de Perfil:** Página de configuración para que los usuarios actualicen sus datos personales y gestionen su cuenta.
-*   **Integración con IA:** Utiliza Genkit para proporcionar sugerencias de análisis inteligentes basadas en la descripción del dataset.
+*   **User Authentication:** A complete login, registration, and social authentication system using Google and GitHub.
+*   **Project Dashboard:** A central dashboard to view, search, filter, and manage all analysis projects.
+*   **New Analysis Creation:** A guided workflow for creating new analysis projects, configuring tools, and uploading datasets.
+*   **Results Visualization:** Dynamic results dashboards with KPIs, charts, descriptive statistics tables, and AI-generated insights.
+*   **Interactive Workspace:** An IDE-like workspace for exploring data files.
+*   **Profile Management:** A settings page for users to update their personal information and manage their account.
+*   **AI Integration:** Leverages Genkit to provide intelligent analysis suggestions based on dataset descriptions.
 
-## Estructura del Proyecto
+## Tech Stack
 
-A continuación se describe la estructura de los archivos y directorios más importantes del proyecto:
+*   **Framework:** [Next.js](https://nextjs.org/)
+*   **UI Library:** [React](https://react.dev/)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **UI Components:** [ShadCN UI](https://ui.shadcn.com/)
+*   **Backend & Auth:** [Firebase](https://firebase.google.com/) (Authentication, Firestore)
+*   **Generative AI:** [Genkit](https://firebase.google.com/docs/genkit) (Google AI)
+
+## Getting Started
+
+Follow these steps to get the development environment running.
+
+### Prerequisites
+
+*   Node.js (v18 or higher)
+*   npm
+
+### Installation & Execution
+
+1.  Install the project dependencies:
+    ```sh
+    npm install
+    ```
+2.  Run the development server:
+    ```sh
+    npm run dev
+    ```
+3.  Open [http://localhost:9002](http://localhost:9002) in your browser to see the application.
+
+## Project Structure
+
+Here is an overview of the most important files and directories in the project:
 
 ```
 /
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx            # Layout raíz de la aplicación
-│   │   ├── page.tsx              # Página de inicio (Landing Page)
-│   │   ├── login/page.tsx        # Página de autenticación
-│   │   ├── dashboard/            # Rutas del panel de control
-│   │   │   ├── page.tsx          # Vista principal del dashboard
-│   │   │   ├── layout.tsx        # Layout para las páginas del dashboard
-│   │   │   ├── new-analysis/page.tsx # Página para crear un nuevo análisis
+│   │   ├── layout.tsx            # Root application layout
+│   │   ├── page.tsx              # Landing Page
+│   │   ├── login/page.tsx        # Authentication page
+│   │   ├── dashboard/            # Dashboard routes
+│   │   │   ├── page.tsx          # Main dashboard view
+│   │   │   ├── layout.tsx        # Layout for dashboard pages
+│   │   │   ├── new-analysis/page.tsx # Page to create a new analysis
 │   │   │   └── ...
-│   │   └── projects/[id]/        # Rutas para proyectos individuales
-│   │       ├── page.tsx          # Espacio de trabajo del proyecto
-│   │       └── results/page.tsx  # Página de resultados del análisis
+│   │   └── projects/[id]/        # Routes for individual projects
+│   │       ├── page.tsx          # Project workspace
+│   │       └── results/page.tsx  # Analysis results page
 │   │
 │   ├── components/
-│   │   ├── layout/               # Componentes de layout (header, footer)
-│   │   ├── pages/                # Componentes específicos de cada página
-│   │   └── ui/                   # Componentes de UI reutilizables (ShadCN)
+│   │   ├── layout/               # Layout components (header, footer)
+│   │   ├── pages/                # Page-specific components
+│   │   └── ui/                   # Reusable UI components (ShadCN)
 │   │
 │   ├── firebase/
-│   │   ├── config.ts             # Configuración de Firebase
-│   │   ├── index.ts              # Inicialización y exportación de servicios de Firebase
-│   │   ├── provider.tsx          # Proveedor de contexto de Firebase
-│   │   └── auth/use-user.tsx     # Hook para obtener el usuario autenticado
+│   │   ├── config.ts             # Firebase configuration
+│   │   ├── index.ts              # Firebase services initialization and export
+│   │   ├── provider.tsx          # Firebase context provider
+│   │   └── auth/use-user.tsx     # Hook to get the authenticated user
 │   │
 │   ├── ai/
-│   │   ├── genkit.ts             # Inicialización de Genkit
-│   │   └── flows/                # Flujos de IA con Genkit
+│   │   ├── genkit.ts             # Genkit initialization
+│   │   └── flows/                # AI flows with Genkit
 │   │
 │   ├── hooks/
-│   │   └── use-project-store.ts  # Hook para la gestión del estado de los proyectos
+│   │   └── use-project-store.ts  # Hook for project state management
 │   │
 │   └── lib/
-│       ├── utils.ts              # Funciones de utilidad
-│       ├── mock-data.ts          # Datos de ejemplo para la aplicación
-│       └── types.ts              # Definiciones de tipos de TypeScript
+│       ├── utils.ts              # Utility functions
+│       ├── mock-data.ts          # Sample data for the application
+│       └── types.ts              # TypeScript type definitions
 │
-├── public/                     # Archivos estáticos
-├── package.json                # Dependencias y scripts del proyecto
-└── tailwind.config.ts          # Configuración de Tailwind CSS
+├── public/                     # Static files
+├── package.json                # Project dependencies and scripts
+└── tailwind.config.ts          # Tailwind CSS configuration
 ```
