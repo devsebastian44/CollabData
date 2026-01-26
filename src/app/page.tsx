@@ -3,7 +3,6 @@ import { MainFooter } from '@/components/layout/main-footer';
 import { Hero } from '@/components/pages/landing/hero';
 import { SocialProof } from '@/components/pages/landing/social-proof';
 import { Features } from '@/components/pages/landing/features';
-import { DeveloperSection } from '@/components/pages/landing/developer-section';
 import { Cta } from '@/components/pages/landing/cta';
 import { ContactForm } from '@/components/pages/landing/contact-form';
 
@@ -15,7 +14,6 @@ export default function Home() {
         <Hero />
         <SocialProof />
         <Features />
-        <DeveloperSection />
         <Cta />
         <ContactForm />
       </main>
