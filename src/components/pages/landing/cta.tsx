@@ -17,9 +17,6 @@ export function Cta() {
           <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-xl shadow-primary/30 transform hover:-translate-y-1" asChild>
             <Link href="/login">Start Free Trial</Link>
           </Button>
-          <Button variant="secondary" size="lg" className="h-14 px-8 text-lg font-bold bg-slate-200 dark:bg-slate-800">
-            Contact Sales
-          </Button>
         </div>
       </div>
     </section>
