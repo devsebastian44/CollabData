@@ -18,7 +18,7 @@ insights = df.get_correlations(target="conversion_rate")
 cd.publish(insights, channel="slack")`.trim();
 
   return (
-    <section className="py-20 md:py-32 bg-background-light dark:bg-surface-dark">
+    <section className="py-20 md:py-32 bg-background-light dark:bg-[#0f172a]">
       <div className="max-w-[1280px] mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           
