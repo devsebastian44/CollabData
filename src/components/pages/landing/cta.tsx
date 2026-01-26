@@ -5,7 +5,6 @@ export function Cta() {
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-background-light dark:bg-background-dark"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px]"></div>
       <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-6 font-headline">
           Ready to engineer <br />
