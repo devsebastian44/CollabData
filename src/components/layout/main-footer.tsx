@@ -6,16 +6,12 @@ import { GithubIcon } from '@/components/icons/github-icon';
 export function MainFooter() {
   const linkSections = [
     {
-      title: 'Product',
-      links: ['Features', 'Integrations', 'Pricing', 'Changelog'],
-    },
-    {
       title: 'Resources',
-      links: ['Documentation', 'API Reference', 'Community', 'Status'],
+      links: ['Documentation', 'API Reference'],
     },
     {
       title: 'Company',
-      links: ['About', 'Blog', 'Careers', 'Contact'],
+      links: ['About'],
     },
   ];
 
