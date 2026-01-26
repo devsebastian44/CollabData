@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function Cta() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="pt-24 pb-12 relative overflow-hidden">
       <div className="absolute inset-0 bg-background-light dark:bg-background-dark"></div>
       <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
         <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-6 font-headline">
