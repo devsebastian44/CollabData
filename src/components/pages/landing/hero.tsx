@@ -32,16 +32,6 @@ export function Hero() {
                 </Link>
               </Button>
             </div>
-            <div className="pt-6 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
-              <div className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-lg text-green-500">check_circle</span>
-                <span>Free 14-day trial</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="material-symbols-outlined text-lg text-green-500">check_circle</span>
-                <span>No credit card required</span>
-              </div>
-            </div>
           </div>
           <div className="flex-1 w-full relative group perspective-1000">
             <div className="relative w-full aspect-[16/10] bg-slate-900 rounded-xl border border-slate-700 shadow-2xl overflow-hidden transform transition-transform duration-500 lg:group-hover:rotate-y-2 lg:rotate-y-6 lg:rotate-x-6 origin-center">
