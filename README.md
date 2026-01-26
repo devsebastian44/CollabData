@@ -2,21 +2,21 @@
 
 This is a Next.js application built with Firebase Studio. It's a platform designed for data teams to collaborate on data engineering and analysis.
 
-## Project Description
+## 📝 Project Description
 
 CollabData is a web platform that enables users to manage data analysis projects, upload datasets, run automated analyses, and visualize the results. The application is built with a focus on real-time collaboration and workflow efficiency.
 
-## Key Features
+## 🔑 Key Features
 
-*   **User Authentication:** A complete login, registration, and social authentication system using Google and GitHub.
-*   **Project Dashboard:** A central dashboard to view, search, filter, and manage all analysis projects.
-*   **New Analysis Creation:** A guided workflow for creating new analysis projects, configuring tools, and uploading datasets.
-*   **Results Visualization:** Dynamic results dashboards with KPIs, charts, descriptive statistics tables, and AI-generated insights.
-*   **Interactive Workspace:** An IDE-like workspace for exploring data files.
-*   **Profile Management:** A settings page for users to update their personal information and manage their account.
-*   **AI Integration:** Leverages Genkit to provide intelligent analysis suggestions based on dataset descriptions.
+*   **🔐 User Authentication:** A complete login, registration, and social authentication system using Google and GitHub.
+*   **📊 Project Dashboard:** A central dashboard to view, search, filter, and manage all analysis projects.
+*   **✨ New Analysis Creation:** A guided workflow for creating new analysis projects, configuring tools, and uploading datasets.
+*   **📈 Results Visualization:** Dynamic results dashboards with KPIs, charts, descriptive statistics tables, and AI-generated insights.
+*   **💻 Interactive Workspace:** An IDE-like workspace for exploring data files.
+*   **👤 Profile Management:** A settings page for users to update their personal information and manage their account.
+*   **🤖 AI Integration:** Leverages Genkit to provide intelligent analysis suggestions based on dataset descriptions.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 *   **Framework:** [Next.js](https://nextjs.org/)
 *   **UI Library:** [React](https://react.dev/)
@@ -26,7 +26,7 @@ CollabData is a web platform that enables users to manage data analysis projects
 *   **Backend & Auth:** [Firebase](https://firebase.google.com/) (Authentication, Firestore)
 *   **Generative AI:** [Genkit](https://firebase.google.com/docs/genkit) (Google AI)
 
-## Getting Started
+## 🚀 Getting Started
 
 Follow these steps to get the development environment running.
 
@@ -47,7 +47,7 @@ Follow these steps to get the development environment running.
     ```
 3.  Open [http://localhost:9002](http://localhost:9002) in your browser to see the application.
 
-## Project Structure
+## 📁 Project Structure
 
 Here is an overview of the most important files and directories in the project:
 
