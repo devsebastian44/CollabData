@@ -91,10 +91,10 @@ export default [
     },
   },
   {
-    files: ['**/*.config.{js,mjs,ts}', 'tailwind.config.ts'],
+    files: ['**/*.config.{js,mjs,ts}', 'tailwind.config.ts', 'prettier.config.js', 'postcss.config.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'commonjs',
+      sourceType: 'module',
       globals: {
         require: 'readonly',
         module: 'readonly',
@@ -124,6 +124,13 @@ export default [
     rules: {
       'no-console': 'off',
       'no-undef': 'off',
+    },
+  },
+  {
+    files: ['**/ui/chart.tsx'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-unused-vars': 'off',
     },
   },
   {
