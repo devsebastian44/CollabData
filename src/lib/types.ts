@@ -32,4 +32,4 @@ export type DescriptiveStat = {
   std: string;
 };
 
-export { FirebaseUser };
+export type { FirebaseUser };
