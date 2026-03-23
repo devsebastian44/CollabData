@@ -9,13 +9,11 @@ import {
   Database as DatabaseIcon, 
   Clock, 
   ArrowRight, 
-  History,
   Edit,
   Archive,
   Trash2,
   PenLine,
   Loader2,
-  RefreshCw,
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
@@ -44,10 +42,10 @@ import { formatDistanceToNow } from 'date-fns';
 
 type ProjectListItemProps = {
   project: Project;
-  onArchive: (projectId: string) => void;
-  onDelete: (projectId: string) => void;
-  onRestore: (projectId: string) => void;
-  onRename: (projectId: string, newName: string) => void;
+  onArchive: (_projectId: string) => void;
+  onDelete: (_projectId: string) => void;
+  onRestore: (_projectId: string) => void;
+  onRename: (_projectId: string, _newName: string) => void;
 };
 
 const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = {
