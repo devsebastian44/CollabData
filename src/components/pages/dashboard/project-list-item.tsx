@@ -42,10 +42,10 @@ import { formatDistanceToNow } from 'date-fns';
 
 type ProjectListItemProps = {
   project: Project;
-  onArchive: (_projectId: string) => void;
-  onDelete: (_projectId: string) => void;
-  onRestore: (_projectId: string) => void;
-  onRename: (_projectId: string, _newName: string) => void;
+  onArchive: (_id: string) => void;
+  onDelete: (_id: string) => void;
+  onRestore: (_id: string) => void;
+  onRename: (_id: string, _newName: string) => void;
 };
 
 const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = {
@@ -72,7 +72,7 @@ const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = 
 };
 
 
-export function ProjectListItem({ project, onArchive, onDelete, onRestore, onRename }: ProjectListItemProps) {
+export function ProjectListItem({ project, onArchive, onDelete, onRestore: _onRestore, onRename }: ProjectListItemProps) {
   const router = useRouter();
   const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
   const [newName, setNewName] = useState(project.name);

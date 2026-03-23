@@ -45,10 +45,10 @@ import { formatDistanceToNow } from 'date-fns';
 
 type ProjectCardProps = {
   project: Project;
-  onArchive: (_projectId: string) => void;
-  onDelete: (_projectId: string) => void;
-  onRestore: (_projectId: string) => void;
-  onRename: (_projectId: string, _newName: string) => void;
+  onArchive: (_id: string) => void;
+  onDelete: (_id: string) => void;
+  onRestore: (_id: string) => void;
+  onRename: (_id: string, _newName: string) => void;
 };
 
 const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = {

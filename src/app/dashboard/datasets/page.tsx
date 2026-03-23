@@ -16,7 +16,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { UserNav } from '@/components/layout/user-nav';
 
-const DatasetItem = ({ file, onDelete }: { file: DatasetFile, onDelete: (fileName: string) => void }) => {
+const DatasetItem = ({ file, onDelete }: { file: DatasetFile, onDelete: (_name: string) => void }) => {
     const router = useRouter();
 
     const handleViewAnalysis = () => {
