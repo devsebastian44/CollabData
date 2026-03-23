@@ -1,7 +1,4 @@
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
-import Link from 'next/link';
 import { UserNav } from '@/components/layout/user-nav';
 
 export default function AnalysisToolsPage() {

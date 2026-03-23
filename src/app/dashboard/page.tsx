@@ -7,7 +7,6 @@ import { ProjectCard } from '@/components/pages/dashboard/project-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, ChevronDown, LayoutGrid, List } from 'lucide-react';
-import Link from 'next/link';
 import { UserNav } from '@/components/layout/user-nav';
 import {
   DropdownMenu,

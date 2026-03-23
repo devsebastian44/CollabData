@@ -3,8 +3,6 @@
 import { useProjectStore } from '@/hooks/use-project-store';
 import { DashboardSidebar } from '@/components/pages/dashboard/sidebar';
 import { ProjectCard } from '@/components/pages/dashboard/project-card';
-import type { Project } from '@/lib/types';
-import Link from 'next/link';
 import { UserNav } from '@/components/layout/user-nav';
 
 export default function TrashPage() {

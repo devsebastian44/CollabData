@@ -56,11 +56,11 @@ export default function SettingsPage() {
                 title: 'Profile Updated',
                 description: 'Your changes have been saved successfully.',
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
             toast({
                 variant: 'destructive',
                 title: 'Error updating profile',
-                description: error.message,
+                description: error instanceof Error ? error.message : 'An unknown error occurred',
             });
         } finally {
             setIsSaving(false);
@@ -77,8 +77,8 @@ export default function SettingsPage() {
                 description: 'Your account has been permanently deleted.',
             });
             router.push('/login');
-        } catch (error: any) {
-            if (error.code === 'auth/requires-recent-login') {
+        } catch (error: unknown) {
+            if (error instanceof Error && error.message === 'auth/requires-recent-login') {
                 toast({
                     variant: 'destructive',
                     title: 'Error deleting account',
@@ -88,7 +88,7 @@ export default function SettingsPage() {
                  toast({
                     variant: 'destructive',
                     title: 'Error deleting account',
-                    description: error.message || 'An unexpected error occurred.',
+                    description: error instanceof Error ? error.message : 'An unknown error occurred',
                 });
             }
         } finally {
