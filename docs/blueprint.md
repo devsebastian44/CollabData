@@ -6,7 +6,7 @@
 - Dataset Upload: Users can upload datasets in CSV, XLSX, or JSON formats.
 - Shared Projects: Users can create and manage shared projects for collaborative analysis.
 - Dynamic EDA Selection: Users can select EDA functions (descriptive statistics, histograms, boxplots, scatter plots, heatmaps) from the UI to be performed on their datasets.
-- AI-Powered Data Insights: The app will provide suggestions for analyses based on dataset content, column datatypes and overall patterns using a tool that determines if each piece of information should be incorporated or not. 
+- AI-Powered Data Insights: The app will provide suggestions for analyses based on dataset content, column datatypes and overall patterns using a tool that determines if each piece of information should be incorporated or not.
 - Results Visualization: Display analysis results using Matplotlib and Seaborn within the application.
 - Scalable Architecture: A modular backend architecture designed to scale efficiently using FastAPI and Pandas.
 

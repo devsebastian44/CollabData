@@ -5,11 +5,13 @@ export default function AnalysisToolsPage() {
   return (
     <div className="flex h-screen w-full bg-background-dark">
       <DashboardSidebar />
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
-        <header className="flex-none px-8 py-6 border-b border-border-dark/50 bg-background-dark/50 backdrop-blur-sm z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <main className="relative flex h-full flex-1 flex-col overflow-hidden">
+        <header className="z-10 flex-none border-b border-border-dark/50 bg-background-dark/50 px-8 py-6 backdrop-blur-sm">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
             <div>
-              <span className="text-white text-lg font-bold leading-normal">Analysis Tools</span>
+              <span className="text-lg font-bold leading-normal text-white">
+                Analysis Tools
+              </span>
             </div>
             <div className="flex items-center gap-3">
               <UserNav />
@@ -17,11 +19,15 @@ export default function AnalysisToolsPage() {
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-          <div className="max-w-[1400px] mx-auto flex flex-col gap-8 items-center justify-center h-full">
+        <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
+          <div className="mx-auto flex h-full max-w-[1400px] flex-col items-center justify-center gap-8">
             <div className="text-center">
-                <h1 className="text-2xl font-bold text-white mb-4">Analysis Tools</h1>
-                <p className="text-text-secondary">This is where you can find and manage your analysis tools.</p>
+              <h1 className="mb-4 text-2xl font-bold text-white">
+                Analysis Tools
+              </h1>
+              <p className="text-text-secondary">
+                This is where you can find and manage your analysis tools.
+              </p>
             </div>
           </div>
         </div>

@@ -53,23 +53,33 @@ const charts = [
 export function FeatureDistributions() {
   return (
     <Card className="shadow-sm">
-      <CardHeader className="flex-row justify-between items-center">
-        <div className="flex gap-2 items-center">
+      <CardHeader className="flex-row items-center justify-between">
+        <div className="flex items-center gap-2">
           <BarChart2 className="text-primary" />
           <CardTitle className="text-lg">Feature Distributions</CardTitle>
         </div>
-        <Button variant="link" className="text-primary p-0 h-auto">View All</Button>
+        <Button variant="link" className="h-auto p-0 text-primary">
+          View All
+        </Button>
       </CardHeader>
-      <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {charts.map((chart) => (
           <div key={chart.label} className="flex flex-col gap-2">
-            <div className="flex justify-between items-end">
-              <label className="text-xs font-semibold uppercase text-slate-500">{chart.label}</label>
-              <span className="text-xs font-mono text-slate-400">Skew: {chart.skew}</span>
+            <div className="flex items-end justify-between">
+              <label className="text-xs font-semibold uppercase text-slate-500">
+                {chart.label}
+              </label>
+              <span className="font-mono text-xs text-slate-400">
+                Skew: {chart.skew}
+              </span>
             </div>
-            <div className="h-32 w-full bg-slate-50 dark:bg-[#111722] rounded-lg border border-dashed border-gray-300 dark:border-[#324467] relative flex items-end justify-between px-2 pt-4 pb-0 overflow-hidden">
+            <div className="relative flex h-32 w-full items-end justify-between overflow-hidden rounded-lg border border-dashed border-gray-300 bg-slate-50 px-2 pb-0 pt-4 dark:border-[#324467] dark:bg-[#111722]">
               {chart.bars.map((bar, index) => (
-                <div key={index} className={`w-[10%] rounded-t-sm transition-colors ${bar.color}`} style={{ height: bar.height }}></div>
+                <div
+                  key={index}
+                  className={`w-[10%] rounded-t-sm transition-colors ${bar.color}`}
+                  style={{ height: bar.height }}
+                ></div>
               ))}
             </div>
           </div>

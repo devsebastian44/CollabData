@@ -99,7 +99,12 @@ export default [
     },
   },
   {
-    files: ['**/*.config.{js,mjs,ts}', 'tailwind.config.ts', 'prettier.config.js', 'postcss.config.mjs'],
+    files: [
+      '**/*.config.{js,mjs,ts}',
+      'tailwind.config.ts',
+      'prettier.config.js',
+      'postcss.config.mjs',
+    ],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -142,12 +147,6 @@ export default [
     },
   },
   {
-    ignores: [
-      '.next/**',
-      'node_modules/**',
-      'dist/**',
-      'build/**',
-      'out/**',
-    ],
+    ignores: ['.next/**', 'node_modules/**', 'dist/**', 'build/**', 'out/**'],
   },
 ];

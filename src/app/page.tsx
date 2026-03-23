@@ -9,7 +9,7 @@ import { DeveloperSection } from '@/components/pages/landing/developer-section';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <MainHeader />
       <main className="flex-1">
         <Hero />

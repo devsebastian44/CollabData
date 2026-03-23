@@ -10,14 +10,16 @@ export function MainHeader() {
   const { user, loading } = useUser();
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-8">
-        <header className="flex items-center justify-between h-16">
+    <div className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
+      <div className="mx-auto max-w-[1280px] px-4 md:px-8">
+        <header className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="text-primary size-8 flex items-center justify-center">
+            <div className="flex size-8 items-center justify-center text-primary">
               <Share2 className="text-3xl" />
             </div>
-            <h2 className="text-lg font-bold tracking-tight font-headline">CollabData</h2>
+            <h2 className="font-headline text-lg font-bold tracking-tight">
+              CollabData
+            </h2>
           </Link>
           <div className="flex items-center gap-3">
             {loading ? (
@@ -26,7 +28,10 @@ export function MainHeader() {
                 <Skeleton className="h-10 w-24" />
               </div>
             ) : user ? (
-              <Button asChild className="font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+              <Button
+                asChild
+                className="font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95"
+              >
                 <Link href="/dashboard">Go to Dashboard</Link>
               </Button>
             ) : (
@@ -34,7 +39,10 @@ export function MainHeader() {
                 <Button variant="ghost" asChild>
                   <Link href="/login">Log In</Link>
                 </Button>
-                <Button asChild className="font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                <Button
+                  asChild
+                  className="font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95"
+                >
                   <Link href="/login">Sign Up</Link>
                 </Button>
               </>

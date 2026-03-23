@@ -4,7 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 
@@ -35,28 +41,51 @@ export function ContactForm() {
   };
 
   return (
-    <section className="pb-20 bg-background-light dark:bg-background-dark">
-      <div className="max-w-2xl mx-auto px-4">
-        <Card className="bg-white dark:bg-surface-dark border-slate-200 dark:border-border-dark shadow-xl">
+    <section className="bg-background-light pb-20 dark:bg-background-dark">
+      <div className="mx-auto max-w-2xl px-4">
+        <Card className="border-slate-200 bg-white shadow-xl dark:border-border-dark dark:bg-surface-dark">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold font-headline">Contact Us</CardTitle>
-            <CardDescription>Have a question or want to learn more? Drop us a line.</CardDescription>
+            <CardTitle className="font-headline text-3xl font-bold">
+              Contact Us
+            </CardTitle>
+            <CardDescription>
+              Have a question or want to learn more? Drop us a line.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} />
+                <Input
+                  id="name"
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Your message..." className="min-h-[120px]" value={message} onChange={(e) => setMessage(e.target.value)} />
+                <Textarea
+                  id="message"
+                  placeholder="Your message..."
+                  className="min-h-[120px]"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
               </div>
-              <Button type="submit" className="w-full h-11 font-bold">Send Message</Button>
+              <Button type="submit" className="h-11 w-full font-bold">
+                Send Message
+              </Button>
             </form>
           </CardContent>
         </Card>

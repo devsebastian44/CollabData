@@ -5,7 +5,12 @@ export type User = {
   avatarUrl: string;
 };
 
-export type ProjectStatus = 'Active' | 'Processing' | 'Archived' | 'Review' | 'Error';
+export type ProjectStatus =
+  | 'Active'
+  | 'Processing'
+  | 'Archived'
+  | 'Review'
+  | 'Error';
 
 export type Project = {
   id: string;

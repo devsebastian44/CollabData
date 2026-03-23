@@ -6,14 +6,14 @@ import { tableData, files, referenceFiles } from '@/lib/mock-data';
 
 export default function WorkspacePage({ params }: { params: { id: string } }) {
   return (
-    <div className="h-screen flex flex-col bg-background-dark">
+    <div className="flex h-screen flex-col bg-background-dark">
       <WorkspaceHeader />
-      <main className="flex flex-1 overflow-hidden w-full">
+      <main className="flex w-full flex-1 overflow-hidden">
         <FileExplorer files={files} referenceFiles={referenceFiles} />
-        <section className="flex-1 flex flex-col bg-surface-dark min-w-0 relative">
+        <section className="relative flex min-w-0 flex-1 flex-col bg-surface-dark">
           <DataTable data={tableData} />
         </section>
-        <AnalysisToolbox projectId={params.id}/>
+        <AnalysisToolbox projectId={params.id} />
       </main>
     </div>
   );

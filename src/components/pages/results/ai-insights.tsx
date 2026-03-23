@@ -1,10 +1,12 @@
-
 'use client';
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lightbulb, RefreshCw, Check, AlertTriangle } from 'lucide-react';
-import { getAIPoweredDataInsights, type AIPoweredDataInsightsOutput } from '@/ai/flows/ai-powered-data-insights';
+import {
+  getAIPoweredDataInsights,
+  type AIPoweredDataInsightsOutput,
+} from '@/ai/flows/ai-powered-data-insights';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const MOCK_DATASET_DESCRIPTION = `
@@ -27,7 +29,9 @@ The dataset has 10,500 rows. There are some missing values in the 'TotalCharges'
 `;
 
 export function AIInsights() {
-  const [insights, setInsights] = useState<AIPoweredDataInsightsOutput | null>(null);
+  const [insights, setInsights] = useState<AIPoweredDataInsightsOutput | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,7 +40,9 @@ export function AIInsights() {
     setError(null);
     setInsights(null);
     try {
-      const result = await getAIPoweredDataInsights({ datasetDescription: MOCK_DATASET_DESCRIPTION });
+      const result = await getAIPoweredDataInsights({
+        datasetDescription: MOCK_DATASET_DESCRIPTION,
+      });
       setInsights(result);
     } catch (err) {
       setError('Failed to generate AI insights. Please try again.');
@@ -63,11 +69,11 @@ export function AIInsights() {
 
     if (error) {
       return (
-        <div className="flex flex-col items-center justify-center text-center text-destructive p-4">
-            <AlertTriangle className="h-8 w-8 mb-2"/>
-            <p className="font-semibold">{error}</p>
+        <div className="flex flex-col items-center justify-center p-4 text-center text-destructive">
+          <AlertTriangle className="mb-2 h-8 w-8" />
+          <p className="font-semibold">{error}</p>
         </div>
-      )
+      );
     }
 
     if (insights && insights.analysisSuggestions.length > 0) {
@@ -75,7 +81,7 @@ export function AIInsights() {
         <ul className="space-y-3">
           {insights.analysisSuggestions.map((suggestion, index) => (
             <li key={index} className="flex items-start gap-3">
-              <Check className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+              <Check className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
               <span className="text-sm">{suggestion}</span>
             </li>
           ))}
@@ -83,23 +89,30 @@ export function AIInsights() {
       );
     }
 
-    return <p className="text-center text-muted-foreground">No suggestions available at this time.</p>;
-  }
+    return (
+      <p className="text-center text-muted-foreground">
+        No suggestions available at this time.
+      </p>
+    );
+  };
 
   return (
     <Card className="shadow-sm">
-      <CardHeader className="flex-row justify-between items-center">
-        <div className="flex gap-2 items-center">
+      <CardHeader className="flex-row items-center justify-between">
+        <div className="flex items-center gap-2">
           <Lightbulb className="text-primary" />
           <CardTitle className="text-lg">AI-Powered Insights</CardTitle>
         </div>
-        <Button variant="ghost" size="icon" onClick={fetchInsights} disabled={loading}>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={fetchInsights}
+          disabled={loading}
+        >
           <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
         </Button>
       </CardHeader>
-      <CardContent>
-        {renderContent()}
-      </CardContent>
+      <CardContent>{renderContent()}</CardContent>
     </Card>
   );
 }

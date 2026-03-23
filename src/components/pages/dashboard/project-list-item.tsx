@@ -4,11 +4,11 @@ import { useState } from 'react';
 import type { Project } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  MoreVertical, 
-  Database as DatabaseIcon, 
-  Clock, 
-  ArrowRight, 
+import {
+  MoreVertical,
+  Database as DatabaseIcon,
+  Clock,
+  ArrowRight,
   Edit,
   Archive,
   Trash2,
@@ -28,17 +28,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { formatDistanceToNow } from 'date-fns';
-
 
 type ProjectListItemProps = {
   project: Project;
@@ -48,31 +47,37 @@ type ProjectListItemProps = {
   onRename: (_id: string, _newName: string) => void;
 };
 
-const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } = {
-  Active: { 
+const statusInfo: { [key: string]: { style: string; icon: React.ReactNode } } =
+  {
+    Active: {
       style: 'bg-emerald-400/10 text-emerald-400 ring-emerald-400/20',
-      icon: <CheckCircle2 size={12} className="mr-1.5" />
-  },
-  Processing: {
+      icon: <CheckCircle2 size={12} className="mr-1.5" />,
+    },
+    Processing: {
       style: 'bg-amber-400/10 text-amber-400 ring-amber-400/20',
-      icon: <Loader2 size={12} className="animate-spin mr-1.5" />
-  },
-  Archived: { 
+      icon: <Loader2 size={12} className="mr-1.5 animate-spin" />,
+    },
+    Archived: {
       style: 'bg-slate-400/10 text-slate-400 ring-slate-400/20',
-      icon: <Archive size={12} className="mr-1.5" />
-  },
-  Review: { 
+      icon: <Archive size={12} className="mr-1.5" />,
+    },
+    Review: {
       style: 'bg-purple-400/10 text-purple-400 ring-purple-400/20',
-      icon: <Edit size={12} className="mr-1.5" />
-  },
-  Error: { 
+      icon: <Edit size={12} className="mr-1.5" />,
+    },
+    Error: {
       style: 'bg-red-500/10 text-red-500 ring-red-500/20',
-      icon: <AlertCircle size={12} className="mr-1.5" />
-  },
-};
+      icon: <AlertCircle size={12} className="mr-1.5" />,
+    },
+  };
 
-
-export function ProjectListItem({ project, onArchive, onDelete, onRestore: _onRestore, onRename }: ProjectListItemProps) {
+export function ProjectListItem({
+  project,
+  onArchive,
+  onDelete,
+  onRestore: _onRestore,
+  onRename,
+}: ProjectListItemProps) {
   const router = useRouter();
   const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
   const [newName, setNewName] = useState(project.name);
@@ -86,107 +91,146 @@ export function ProjectListItem({ project, onArchive, onDelete, onRestore: _onRe
   const remainingMembers = project.members.length - displayedMembers.length;
 
   const safeDate = project.createdAt ? new Date(project.createdAt) : null;
-  const timeAgo = safeDate && !isNaN(safeDate.getTime())
-    ? formatDistanceToNow(safeDate, { addSuffix: true })
-    : "";
-  
+  const timeAgo =
+    safeDate && !isNaN(safeDate.getTime())
+      ? formatDistanceToNow(safeDate, { addSuffix: true })
+      : '';
+
   return (
     <>
-      <div className="group flex items-center gap-4 bg-surface-dark border border-border-dark hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200 rounded-lg p-4">
-        <div className="flex-1 flex items-center gap-4">
-            <Link href={`/projects/${project.id}`} className="font-bold text-white group-hover:text-primary transition-colors flex-1 truncate">{project.name}</Link>
+      <div className="group flex items-center gap-4 rounded-lg border border-border-dark bg-surface-dark p-4 transition-all duration-200 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
+        <div className="flex flex-1 items-center gap-4">
+          <Link
+            href={`/projects/${project.id}`}
+            className="flex-1 truncate font-bold text-white transition-colors group-hover:text-primary"
+          >
+            {project.name}
+          </Link>
         </div>
         <div className="w-32">
-            <Badge variant="outline" className={`w-fit flex items-center ${statusInfo[project.status]?.style || ''}`}>
-                {statusInfo[project.status]?.icon}
-                {project.status}
-            </Badge>
+          <Badge
+            variant="outline"
+            className={`flex w-fit items-center ${statusInfo[project.status]?.style || ''}`}
+          >
+            {statusInfo[project.status]?.icon}
+            {project.status}
+          </Badge>
         </div>
-        <div className="flex items-center gap-1.5 text-sm text-text-secondary w-28" title="Datasets">
-            <DatabaseIcon size={18} className="shrink-0" />
-            <span>{project.datasetCount} {project.datasetCount === 1 ? 'Dataset' : 'Datasets'}</span>
+        <div
+          className="flex w-28 items-center gap-1.5 text-sm text-text-secondary"
+          title="Datasets"
+        >
+          <DatabaseIcon size={18} className="shrink-0" />
+          <span>
+            {project.datasetCount}{' '}
+            {project.datasetCount === 1 ? 'Dataset' : 'Datasets'}
+          </span>
         </div>
         {timeAgo && (
-            <div className="flex items-center gap-1.5 text-sm text-text-secondary w-36" title="Created">
-                <Clock size={18} className="shrink-0" />
-                <span className="whitespace-nowrap">{timeAgo}</span>
-            </div>
+          <div
+            className="flex w-36 items-center gap-1.5 text-sm text-text-secondary"
+            title="Created"
+          >
+            <Clock size={18} className="shrink-0" />
+            <span className="whitespace-nowrap">{timeAgo}</span>
+          </div>
         )}
-        <div className="flex -space-x-2 overflow-hidden w-28">
-            {displayedMembers.map(member => (
+        <div className="flex w-28 -space-x-2 overflow-hidden">
+          {displayedMembers.map((member) => (
             <Image
-                key={member.name}
-                src={member.avatarUrl}
-                alt={member.name}
-                width={32}
-                height={32}
-                className="h-8 w-8 rounded-full ring-2 ring-background-dark object-cover aspect-square"
-                data-ai-hint="person face"
+              key={member.name}
+              src={member.avatarUrl}
+              alt={member.name}
+              width={32}
+              height={32}
+              className="aspect-square h-8 w-8 rounded-full object-cover ring-2 ring-background-dark"
+              data-ai-hint="person face"
             />
-            ))}
-            {remainingMembers > 0 && (
-            <div className="inline-block size-8 rounded-full flex items-center justify-center bg-[#232f48] text-xs font-medium text-white ring-2 ring-background-dark">
-                +{remainingMembers}
+          ))}
+          {remainingMembers > 0 && (
+            <div className="inline-block flex size-8 items-center justify-center rounded-full bg-[#232f48] text-xs font-medium text-white ring-2 ring-background-dark">
+              +{remainingMembers}
             </div>
-            )}
+          )}
         </div>
-        
+
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-text-secondary hover:text-white shrink-0 -m-2">
-                <MoreVertical />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}/results`)}>
-                <ArrowRight className="mr-2 h-4 w-4" />
-                <span>View Analysis</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => router.push(`/projects/${project.id}`)}>
-                <Edit className="mr-2 h-4 w-4" />
-                <span>Open Workspace</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
-                <PenLine className="mr-2 h-4 w-4" />
-                <span>Rename</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => onArchive(project.id)}>
-                <Archive className="mr-2 h-4 w-4" />
-                <span>Archive</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-500 focus:text-white focus:bg-red-500" onSelect={() => onDelete(project.id)}>
-                <Trash2 className="mr-2 h-4 w-4" />
-                <span>Delete</span>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="-m-2 shrink-0 text-text-secondary hover:text-white"
+            >
+              <MoreVertical />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              onSelect={() => router.push(`/projects/${project.id}/results`)}
+            >
+              <ArrowRight className="mr-2 h-4 w-4" />
+              <span>View Analysis</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={() => router.push(`/projects/${project.id}`)}
+            >
+              <Edit className="mr-2 h-4 w-4" />
+              <span>Open Workspace</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsRenameDialogOpen(true)}>
+              <PenLine className="mr-2 h-4 w-4" />
+              <span>Rename</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => onArchive(project.id)}>
+              <Archive className="mr-2 h-4 w-4" />
+              <span>Archive</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className="text-red-500 focus:bg-red-500 focus:text-white"
+              onSelect={() => onDelete(project.id)}
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              <span>Delete</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>
         <DialogContent>
-            <DialogHeader>
-                <DialogTitle>Rename project</DialogTitle>
-                <DialogDescription>
-                    Current name: "{project.name}"
-                </DialogDescription>
-            </DialogHeader>
-            <div className="py-2">
-                <Label htmlFor="new-name" className="sr-only">New Name</Label>
-                <Input
-                    id="new-name"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Enter new project name"
-                    onKeyDown={(e) => e.key === 'Enter' && handleRename()}
-                />
-            </div>
-            <DialogFooter>
-                <Button variant="ghost" onClick={() => { setIsRenameDialogOpen(false); setNewName(project.name); }}>Cancel</Button>
-                <Button onClick={handleRename}>Rename</Button>
-            </DialogFooter>
+          <DialogHeader>
+            <DialogTitle>Rename project</DialogTitle>
+            <DialogDescription>
+              Current name: "{project.name}"
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-2">
+            <Label htmlFor="new-name" className="sr-only">
+              New Name
+            </Label>
+            <Input
+              id="new-name"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              placeholder="Enter new project name"
+              onKeyDown={(e) => e.key === 'Enter' && handleRename()}
+            />
+          </div>
+          <DialogFooter>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setIsRenameDialogOpen(false);
+                setNewName(project.name);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleRename}>Rename</Button>
+          </DialogFooter>
         </DialogContent>
-    </Dialog>
+      </Dialog>
     </>
   );
 }

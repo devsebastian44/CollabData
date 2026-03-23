@@ -1,10 +1,6 @@
 {
   "entities": {},
   "auth": {
-    "providers": [
-      "email-password",
-      "google.com",
-      "github.com"
-    ]
+    "providers": ["email-password", "google.com", "github.com"]
   }
 }

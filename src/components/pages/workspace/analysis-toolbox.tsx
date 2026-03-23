@@ -2,7 +2,13 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Wrench, Play } from 'lucide-react';
 import Link from 'next/link';
 
@@ -22,38 +28,59 @@ export function AnalysisToolbox({ projectId }: { projectId: string }) {
   ];
 
   return (
-    <aside className="w-80 bg-background-dark border-l border-border-dark flex-col shrink-0 z-10 hidden lg:flex">
-      <div className="px-5 py-4 border-b border-border-dark flex items-center gap-2">
+    <aside className="z-10 hidden w-80 shrink-0 flex-col border-l border-border-dark bg-background-dark lg:flex">
+      <div className="flex items-center gap-2 border-b border-border-dark px-5 py-4">
         <Wrench className="text-primary" size={20} />
-        <h3 className="text-white text-sm font-bold uppercase tracking-wider">Analysis Toolbox</h3>
+        <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+          Analysis Toolbox
+        </h3>
       </div>
-      <div className="flex-1 overflow-y-auto p-5 space-y-6 custom-scrollbar">
+      <div className="custom-scrollbar flex-1 space-y-6 overflow-y-auto p-5">
         <div>
-          <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Descriptive Statistics</h4>
+          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Descriptive Statistics
+          </h4>
           <div className="space-y-2">
-            {descriptiveStats.map(stat => (
-              <div key={stat.id} className="flex items-center justify-between group cursor-pointer">
-                <Label htmlFor={stat.id} className="text-white text-sm group-hover:text-primary transition-colors cursor-pointer">{stat.label}</Label>
+            {descriptiveStats.map((stat) => (
+              <div
+                key={stat.id}
+                className="group flex cursor-pointer items-center justify-between"
+              >
+                <Label
+                  htmlFor={stat.id}
+                  className="cursor-pointer text-sm text-white transition-colors group-hover:text-primary"
+                >
+                  {stat.label}
+                </Label>
                 <Checkbox id={stat.id} defaultChecked={stat.checked} />
               </div>
             ))}
           </div>
         </div>
-        <div className="h-px bg-border-dark w-full"></div>
+        <div className="h-px w-full bg-border-dark"></div>
         <div>
-          <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Visualizations</h4>
+          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Visualizations
+          </h4>
           <div className="space-y-3">
-            {visualizations.map(vis => (
+            {visualizations.map((vis) => (
               <div key={vis.id} className="flex items-center justify-between">
-                <Label htmlFor={vis.id} className="text-white text-sm cursor-pointer">{vis.label}</Label>
+                <Label
+                  htmlFor={vis.id}
+                  className="cursor-pointer text-sm text-white"
+                >
+                  {vis.label}
+                </Label>
                 <Switch id={vis.id} defaultChecked={vis.checked} />
               </div>
             ))}
           </div>
         </div>
-        <div className="h-px bg-border-dark w-full"></div>
+        <div className="h-px w-full bg-border-dark"></div>
         <div>
-          <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Target Variable</h4>
+          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Target Variable
+          </h4>
           <Select defaultValue="revenue">
             <SelectTrigger>
               <SelectValue placeholder="Select a variable" />
@@ -66,8 +93,11 @@ export function AnalysisToolbox({ projectId }: { projectId: string }) {
           </Select>
         </div>
       </div>
-      <div className="p-5 border-t border-border-dark bg-background-dark">
-        <Button className="w-full h-11 font-bold shadow-lg shadow-blue-900/20 active:scale-[0.98]" asChild>
+      <div className="border-t border-border-dark bg-background-dark p-5">
+        <Button
+          className="h-11 w-full font-bold shadow-lg shadow-blue-900/20 active:scale-[0.98]"
+          asChild
+        >
           <Link href={`/projects/${projectId}/results`}>
             <Play />
             Run Analysis

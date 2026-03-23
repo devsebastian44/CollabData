@@ -6,23 +6,27 @@ import type { FirebaseInstances } from './index';
 const FirebaseContext = createContext<FirebaseInstances | null>(null);
 
 export const FirebaseProvider = ({
-    children,
-    value,
+  children,
+  value,
 }: {
-    children: ReactNode;
-    value: FirebaseInstances | null;
+  children: ReactNode;
+  value: FirebaseInstances | null;
 }) => {
-    return <FirebaseContext.Provider value={value}>{children}</FirebaseContext.Provider>;
+  return (
+    <FirebaseContext.Provider value={value}>
+      {children}
+    </FirebaseContext.Provider>
+  );
 };
 
 export const useFirebase = () => {
-    return useContext(FirebaseContext);
+  return useContext(FirebaseContext);
 };
 
 export const useAuth = () => {
-    return useFirebase()?.auth;
+  return useFirebase()?.auth;
 };
 
 export const useFirestore = () => {
-    return useFirebase()?.firestore;
+  return useFirebase()?.firestore;
 };

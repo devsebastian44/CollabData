@@ -1,7 +1,19 @@
 'use client';
 
-import { Area, Bar, CartesianGrid, ComposedChart, Tooltip, XAxis, YAxis } from 'recharts';
-import { ChartConfig, ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
+import {
+  Area,
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltipContent,
+} from '@/components/ui/chart';
 
 const chartData = [
   { month: 'January', revenue: 186, users: 80 },
@@ -25,7 +37,10 @@ const chartConfig = {
 
 export function HeroChart() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full h-full">
+    <ChartContainer
+      config={chartConfig}
+      className="h-full min-h-[200px] w-full"
+    >
       <ComposedChart
         data={chartData}
         margin={{
@@ -36,12 +51,24 @@ export function HeroChart() {
         }}
       >
         <defs>
-            <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1}/>
-            </linearGradient>
+          <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="hsl(var(--primary))"
+              stopOpacity={0.8}
+            />
+            <stop
+              offset="95%"
+              stopColor="hsl(var(--primary))"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
         </defs>
-        <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="hsl(var(--border) / 0.5)" />
+        <CartesianGrid
+          vertical={false}
+          strokeDasharray="3 3"
+          stroke="hsl(var(--border) / 0.5)"
+        />
         <XAxis
           dataKey="month"
           tickLine={false}
@@ -67,18 +94,35 @@ export function HeroChart() {
           tickMargin={10}
         />
         <Tooltip
-          content={<ChartTooltipContent 
-            formatter={(value, name) => {
-              if (name === 'revenue') {
-                return [`$${(value as number * 1000).toLocaleString()}`, 'Revenue']
-              }
-              return [value, 'Active Users']
-            }}
-          />}
+          content={
+            <ChartTooltipContent
+              formatter={(value, name) => {
+                if (name === 'revenue') {
+                  return [
+                    `$${((value as number) * 1000).toLocaleString()}`,
+                    'Revenue',
+                  ];
+                }
+                return [value, 'Active Users'];
+              }}
+            />
+          }
           cursor={{ fill: 'hsl(var(--muted) / 0.2)' }}
         />
-        <Bar dataKey="users" yAxisId="right" fill="hsl(var(--chart-2) / 0.5)" radius={4} />
-        <Area type="monotone" dataKey="revenue" yAxisId="left" stroke="hsl(var(--primary))" strokeWidth={2} fill="url(#colorRevenue)" />
+        <Bar
+          dataKey="users"
+          yAxisId="right"
+          fill="hsl(var(--chart-2) / 0.5)"
+          radius={4}
+        />
+        <Area
+          type="monotone"
+          dataKey="revenue"
+          yAxisId="left"
+          stroke="hsl(var(--primary))"
+          strokeWidth={2}
+          fill="url(#colorRevenue)"
+        />
       </ComposedChart>
     </ChartContainer>
   );
