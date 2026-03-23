@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  lint:
+  code-quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: lint
+    needs: code-quality
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
