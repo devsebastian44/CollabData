@@ -1,96 +1,96 @@
-# CollabData - Collaborative Data Engineering Platform
+# CollabData - Plataforma Colaborativa de Ingeniería de Datos
 
-This is a Next.js application built with Firebase Studio. It's a platform designed for data teams to collaborate on data engineering and analysis.
+Esta es una aplicación Next.js construida con Firebase Studio. Es una plataforma diseñada para que equipos de datos colaboren en ingeniería y análisis de datos.
 
-## 📝 Project Description
+## 📝 Descripción del Proyecto
 
-CollabData is a web platform that enables users to manage data analysis projects, upload datasets, run automated analyses, and visualize the results. The application is built with a focus on real-time collaboration and workflow efficiency.
+CollabData es una plataforma web que permite a los usuarios gestionar proyectos de análisis de datos, cargar conjuntos de datos (datasets), ejecutar análisis automatizados y visualizar los resultados. La aplicación está diseñada con un enfoque en la colaboración en tiempo real y la eficiencia del flujo de trabajo.
 
-## 🔑 Key Features
+## 🔑 Características Principales
 
-- **🔐 User Authentication:** A complete login, registration, and social authentication system using Google and GitHub.
-- **📊 Project Dashboard:** A central dashboard to view, search, filter, and manage all analysis projects.
-- **✨ New Analysis Creation:** A guided workflow for creating new analysis projects, configuring tools, and uploading datasets.
-- **📈 Results Visualization:** Dynamic results dashboards with KPIs, charts, descriptive statistics tables, and AI-generated insights.
-- **💻 Interactive Workspace:** An IDE-like workspace for exploring data files.
-- **👤 Profile Management:** A settings page for users to update their personal information and manage their account.
-- **🤖 AI Integration:** Leverages Genkit to provide intelligent analysis suggestions based on dataset descriptions.
+- **🔐 Autenticación de Usuarios:** Sistema completo de inicio de sesión, registro y autenticación social usando Google y GitHub.
+- **📊 Panel de Control (Dashboard):** Un panel central para ver, buscar, filtrar y gestionar todos los proyectos de análisis.
+- **✨ Creación de Nuevos Análisis:** Un flujo guiado para crear nuevos proyectos de análisis, configurar herramientas y cargar conjuntos de datos.
+- **📈 Visualización de Resultados:** Paneles de resultados dinámicos con KPIs, gráficos, tablas de estadísticas descriptivas e insights generados por IA.
+- **💻 Espacio de Trabajo Interactivo:** Un entorno similar a un IDE para explorar archivos de datos.
+- **👤 Gestión de Perfil:** Página de ajustes para que los usuarios actualicen su información personal y gestionen su cuenta.
+- **🤖 Integración de IA:** Utiliza Genkit para proporcionar sugerencias de análisis inteligentes basadas en las descripciones de los datasets.
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Tecnológico
 
 - **Framework:** [Next.js](https://nextjs.org/)
-- **UI Library:** [React](https://react.dev/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components:** [ShadCN UI](https://ui.shadcn.com/)
-- **Backend & Auth:** [Firebase](https://firebase.google.com/) (Authentication, Firestore)
-- **Generative AI:** [Genkit](https://firebase.google.com/docs/genkit) (Google AI)
+- **Biblioteca UI:** [React](https://react.dev/)
+- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilos:** [Tailwind CSS](https://tailwindcss.com/)
+- **Componentes UI:** [ShadCN UI](https://ui.shadcn.com/)
+- **Backend y Autenticación:** [Firebase](https://firebase.google.com/) (Authentication, Firestore)
+- **IA Generativa:** [Genkit](https://firebase.google.com/docs/genkit) (Google AI)
 
-## 🚀 Getting Started
+## 🚀 Cómo Empezar
 
-Follow these steps to get the development environment running.
+Sigue estos pasos para poner en marcha el entorno de desarrollo.
 
-### Prerequisites
+### Prerrequisitos
 
-- Node.js (v18 or higher)
+- Node.js (v18 o superior)
 - npm
 
-### Installation & Execution
+### Instalación y Ejecución
 
-1.  Install the project dependencies:
+1.  Instala las dependencias del proyecto:
     ```sh
     npm install
     ```
-2.  Run the development server:
+2.  Inicia el servidor de desarrollo:
     ```sh
     npm run dev
     ```
-3.  Open [http://localhost:9002](http://localhost:9002) in your browser to see the application.
+3.  Abre [http://localhost:9002](http://localhost:9002) en tu navegador para ver la aplicación.
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
-Here is an overview of the most important files and directories in the project:
+Aquí tienes una descripción general de los archivos y directorios más importantes del proyecto:
 
 ```
 /
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx            # Root application layout
+│   │   ├── layout.tsx            # Layout raíz de la aplicación
 │   │   ├── page.tsx              # Landing Page
-│   │   ├── login/page.tsx        # Authentication page
-│   │   ├── dashboard/            # Dashboard routes
-│   │   │   ├── page.tsx          # Main dashboard view
-│   │   │   ├── layout.tsx        # Layout for dashboard pages
-│   │   │   ├── new-analysis/page.tsx # Page to create a new analysis
+│   │   ├── login/page.tsx        # Página de autenticación
+│   │   ├── dashboard/            # Rutas del panel de control
+│   │   │   ├── page.tsx          # Vista principal del dashboard
+│   │   │   ├── layout.tsx        # Layout para las páginas del dashboard
+│   │   │   ├── new-analysis/page.tsx # Página para crear un nuevo análisis
 │   │   │   └── ...
-│   │   └── projects/[id]/        # Routes for individual projects
-│   │       ├── page.tsx          # Project workspace
-│   │       └── results/page.tsx  # Analysis results page
+│   │   └── projects/[id]/        # Rutas para proyectos individuales
+│   │       ├── page.tsx          # Espacio de trabajo del proyecto
+│   │       └── results/page.tsx  # Página de resultados del análisis
 │   │
 │   ├── components/
-│   │   ├── layout/               # Layout components (header, footer)
-│   │   ├── pages/                # Page-specific components
-│   │   └── ui/                   # Reusable UI components (ShadCN)
+│   │   ├── layout/               # Componentes de layout (header, footer)
+│   │   ├── pages/                # Componentes específicos de cada página
+│   │   └── ui/                   # Componentes UI reutilizables (ShadCN)
 │   │
 │   ├── firebase/
-│   │   ├── config.ts             # Firebase configuration
-│   │   ├── index.ts              # Firebase services initialization and export
-│   │   ├── provider.tsx          # Firebase context provider
-│   │   └── auth/use-user.tsx     # Hook to get the authenticated user
+│   │   ├── config.ts             # Configuración de Firebase
+│   │   ├── index.ts              # Inicialización y exportación de servicios Firebase
+│   │   ├── provider.tsx          # Proveedor de contexto Firebase
+│   │   └── auth/use-user.tsx     # Hook para obtener el usuario autenticado
 │   │
 │   ├── ai/
-│   │   ├── genkit.ts             # Genkit initialization
-│   │   └── flows/                # AI flows with Genkit
+│   │   ├── genkit.ts             # Inicialización de Genkit
+│   │   └── flows/                # Flujos de IA con Genkit
 │   │
 │   ├── hooks/
-│   │   └── use-project-store.ts  # Hook for project state management
+│   │   └── use-project-store.ts  # Hook para la gestión del estado del proyecto
 │   │
 │   └── lib/
-│       ├── utils.ts              # Utility functions
-│       ├── mock-data.ts          # Sample data for the application
-│       └── types.ts              # TypeScript type definitions
+│       ├── utils.ts              # Funciones de utilidad
+│       ├── mock-data.ts          # Datos de ejemplo para la aplicación
+│       └── types.ts              # Definiciones de tipos TypeScript
 │
-├── public/                     # Static files
-├── package.json                # Project dependencies and scripts
-└── tailwind.config.ts          # Tailwind CSS configuration
+├── public/                     # Archivos estáticos
+├── package.json                # Dependencias y scripts del proyecto
+└── tailwind.config.ts          # Configuración de Tailwind CSS
 ```
