@@ -36,21 +36,21 @@ El proyecto combina una arquitectura moderna de frontend orientada a componentes
 
 ## 🛠️ Tech Stack
 
-| Categoría | Tecnología |
-|---|---|
-| Framework web | Next.js 15+ (App Router) |
-| Lenguaje | TypeScript 5.x |
-| Biblioteca UI | React + ShadCN UI |
-| Estilos | Tailwind CSS 3.x |
-| Iconografía | Lucide React |
-| Backend & Auth | Firebase Authentication + Firestore |
-| Hosting | Firebase App Hosting + Vercel |
-| IA Generativa | Google Genkit (AI Flows) |
-| Linting | ESLint + Prettier |
-| CI/CD | GitHub Actions |
-| Dev Environment | Firebase Studio / Project IDX |
-| Package Manager | npm |
-| Node versioning | `.nvmrc` (Node 18+) |
+| Categoría       | Tecnología                          |
+| --------------- | ----------------------------------- |
+| Framework web   | Next.js 15+ (App Router)            |
+| Lenguaje        | TypeScript 5.x                      |
+| Biblioteca UI   | React + ShadCN UI                   |
+| Estilos         | Tailwind CSS 3.x                    |
+| Iconografía     | Lucide React                        |
+| Backend & Auth  | Firebase Authentication + Firestore |
+| Hosting         | Firebase App Hosting + Vercel       |
+| IA Generativa   | Google Genkit (AI Flows)            |
+| Linting         | ESLint + Prettier                   |
+| CI/CD           | GitHub Actions                      |
+| Dev Environment | Firebase Studio / Project IDX       |
+| Package Manager | npm                                 |
+| Node versioning | `.nvmrc` (Node 18+)                 |
 
 ---
 
@@ -64,17 +64,20 @@ El proyecto combina una arquitectura moderna de frontend orientada a componentes
 - Acceso a **Google AI / Genkit** (para los flujos de IA)
 
 ### 1. Clonar el repositorio
+
 ```bash
 git clone https://github.com/devsebastian44/CollabData.git
 cd CollabData
 ```
 
 ### 2. Usar la versión correcta de Node
+
 ```bash
 nvm use
 ```
 
 ### 3. Instalar dependencias
+
 ```bash
 npm install
 ```
@@ -82,6 +85,7 @@ npm install
 ### 4. Configurar variables de entorno
 
 Crea un archivo `.env.local` en la raíz del proyecto con tus credenciales de Firebase y Genkit:
+
 ```env
 # Firebase
 NEXT_PUBLIC_FIREBASE_API_KEY=
@@ -98,6 +102,7 @@ GOOGLE_GENAI_API_KEY=
 ### 5. Configurar Firebase
 
 Asegúrate de que tu proyecto Firebase esté correctamente referenciado en `.firebaserc`:
+
 ```json
 {
   "projects": {
@@ -111,6 +116,7 @@ Asegúrate de que tu proyecto Firebase esté correctamente referenciado en `.fir
 ## ▶️ Usage
 
 ### Servidor de desarrollo
+
 ```bash
 npm run dev
 ```
@@ -120,12 +126,14 @@ Abre [http://localhost:9002](http://localhost:9002) en tu navegador.
 > El servidor Next.js corre en el puerto **9002** por configuración del proyecto.
 
 ### Build de producción
+
 ```bash
 npm run build
 npm run start
 ```
 
 ### Lint del código
+
 ```bash
 npm run lint
 ```
@@ -133,6 +141,7 @@ npm run lint
 ### Despliegue en Firebase App Hosting
 
 El despliegue se gestiona automáticamente a través de **GitHub Actions** al hacer push a la rama principal. De forma manual:
+
 ```bash
 firebase deploy
 ```
@@ -142,6 +151,7 @@ firebase deploy
 ---
 
 ## 📁 Project Structure
+
 ```
 CollabData/
 │
