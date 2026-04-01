@@ -221,23 +221,41 @@ CollabData/
 
 ---
 
-## 🔐 Security
+## 🔐 Security & DevSecOps Architecture
+
+Este proyecto implementa una arquitectura rigurosa DevSecOps, separando el ecosistema de laboratorio privado y el entorno público de portafolio para maximizar la seguridad por diseño.
+
+### Estrategia Dual-Repo (GitLab ↔ GitHub)
+
+#### 1. GitLab (Laboratorio Privado & Source of Truth)
+El repositorio de GitLab sirve como el entorno completo de desarrollo. Contiene:
+- **Código íntegro**: Aplicación, flujos completos de IA (`src/ai/flows`), tests y configs.
+- **CI/CD Activo**: Definición en `.gitlab-ci.yml` para ejecutar linting, validación estática y escáner de seguridad en la nube.
+- **Configuraciones Críticas**: Herramientas internas como `apphosting.yaml`.
+
+#### 2. GitHub (Portafolio Público Sanitizado)
+La exposición pública se restringe al código estructural esencial. Se omite completamente el entorno de testeo y automatización privada, garantizando una superficie de ataque mínima.
+
+### Sincronización Segura (`publish_public.ps1`)
+
+La transición desde el entorno de laboratorio (GitLab) al portafolio (GitHub) se automatiza estrictamente mediante `scripts/publish_public.ps1`.
+Este script automatiza el flujo de publicación:
+1. **Verificación de Entorno:** Exige contexto en `main` sin cambios pendientes.
+2. **Purgado de Archivos Privados:** Elimina lógicas y configuraciones privadas (ej. `tests/`, `configs/`, `src/ai/flows`, `apphosting.yaml` y `.gitlab-ci.yml`) en una rama efímera (`public`).
+3. **Publicación Limpia:** Fuerza un push a GitHub asegurando que el contenido sanitizado refleje un portafolio profesional.
 
 ### Autenticación y autorización
 
-La autenticación está completamente delegada a **Firebase Authentication**, lo que garantiza el manejo seguro de credenciales, tokens JWT y sesiones. Las rutas del dashboard son accesibles únicamente por usuarios autenticados, verificados mediante el hook `use-user.tsx` en el lado del cliente.
+La autenticación está delegada a **Firebase Authentication**, garantizando manejo seguro de credenciales y sesiones.
 
-### Variables de entorno
+### Variables de Entorno y Control de Imágenes Externa
 
-Todas las claves de API y configuraciones sensibles se gestionan a través de variables de entorno definidas en `.env.local`, el cual está incluido en `.gitignore` y nunca se expone en el repositorio. Las variables prefijadas con `NEXT_PUBLIC_` se exponen al cliente de forma controlada; las variables del lado servidor (como `GOOGLE_GENAI_API_KEY`) permanecen exclusivamente en el entorno de ejecución de Next.js.
-
-### Imágenes externas controladas
-
-El archivo `next.config.ts` define una lista blanca explícita de dominios permitidos para carga de imágenes remotas (`placehold.co`, `images.unsplash.com`, `picsum.photos`), previniendo el abuso del componente `<Image>` de Next.js para cargar contenido de dominios no autorizados.
+- **Variables Sensibles**: Claves gestionadas en `.env.local` (excluido por `.gitignore`). Las claves de backend servidor (`GOOGLE_GENAI_API_KEY`) nunca se exponen.
+- **Lista Blanca de Imágenes**: `next.config.ts` restringe la carga de dominios remotos.
 
 ### Firestore Security Rules
 
-Se recomienda definir **Firestore Security Rules** granulares en la consola de Firebase para garantizar que cada usuario solo pueda leer y escribir sus propios documentos de proyecto, evitando acceso cruzado entre cuentas.
+Se establecen **Firestore Security Rules** granulares usando validación de _UID_ para proteger accesos individuales por proyecto y aislar la data de cada tenant en el entorno escalado.
 
 ---
 

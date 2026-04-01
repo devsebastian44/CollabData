@@ -43,3 +43,10 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
+# DevSecOps / Private
+.gitlab-ci.yml
+scripts/
+tests/
+configs/
+apphosting.yaml
+src/ai/flows/
