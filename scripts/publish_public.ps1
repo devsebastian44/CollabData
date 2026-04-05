@@ -50,6 +50,5 @@ git push origin public:main --force
 # 7. Retorno Seguro al Entorno de Trabajo
 Write-Host "[*] Volviendo al Laboratorio (main)..."
 git checkout main -f
-git clean -fd 2>$null
 
 Write-Host "[*] Portafolio en GitHub actualizado y Lab en GitLab protegido" -ForegroundColor Green
