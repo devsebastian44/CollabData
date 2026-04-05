@@ -39,7 +39,7 @@ export function HeroChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="h-full min-h-[200px] w-full"
+      className="min-h-0 min-w-0"
     >
       <ComposedChart
         data={chartData}
