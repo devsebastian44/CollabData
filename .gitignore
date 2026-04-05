@@ -43,8 +43,7 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
-# DevSecOps / Private (Sanitización manual vía scripts/publish_public.ps1)
-# No ignorar globalmente para permitir el rastreo en el Lab de GitLab
+# DevSecOps / Private (Configuración local del Laboratorio)
 # scripts/
 # tests/
 # configs/
