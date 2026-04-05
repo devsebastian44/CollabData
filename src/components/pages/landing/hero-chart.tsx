@@ -37,10 +37,7 @@ const chartConfig = {
 
 export function HeroChart() {
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="min-h-0 min-w-0"
-    >
+    <ChartContainer config={chartConfig} className="min-h-0 min-w-0">
       <ComposedChart
         data={chartData}
         margin={{
