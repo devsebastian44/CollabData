@@ -43,10 +43,8 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
-# DevSecOps / Private
-.gitlab-ci.yml
+# DevSecOps / Private (Solo ignorar en rama public vía script, no en gitignore global)
 scripts/
 tests/
 configs/
 apphosting.yaml
-src/ai/flows/

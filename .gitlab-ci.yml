@@ -1,0 +1,49 @@
+stages:
+  - lint
+  - build
+  - test
+  - security
+
+variables:
+  NODE_ENV: "production"
+
+default:
+  image: node:20-alpine
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+      - .npm/
+
+before_script:
+  - npm ci
+
+linting:
+  stage: lint
+  script:
+    - npm run lint
+    - npm run format:check
+    - npm run typecheck
+
+build_app:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+      - out/
+    expire_in: 1 week
+
+unit_tests:
+  stage: test
+  script:
+    - echo "Running Playwright/Jest tests (add script here once configured)"
+    # - npm run test:ci
+
+security_audit:
+  stage: security
+  script:
+    - npm audit --audit-level=high || true
