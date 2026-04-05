@@ -79,12 +79,14 @@ export function AIInsights() {
     if (insights && insights.analysisSuggestions.length > 0) {
       return (
         <ul className="space-y-3">
-          {insights.analysisSuggestions.map((suggestion: string, index: number) => (
-            <li key={index} className="flex items-start gap-3">
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
-              <span className="text-sm">{suggestion}</span>
-            </li>
-          ))}
+          {insights.analysisSuggestions.map(
+            (suggestion: string, index: number) => (
+              <li key={index} className="flex items-start gap-3">
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
+                <span className="text-sm">{suggestion}</span>
+              </li>
+            )
+          )}
         </ul>
       );
     }

@@ -4,8 +4,8 @@ stages:
   - test
   - security
 
-variables:
-  NODE_ENV: "production"
+# Env variables (moved to job level to allow npm ci to install dev dependencies for linting)
+# NODE_ENV: "production"
 
 default:
   image: node:20-alpine
