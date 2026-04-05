@@ -43,8 +43,9 @@ next-env.d.ts
 # firebase
 firebase-debug.log
 firestore-debug.log
-# DevSecOps / Private (Solo ignorar en rama public vía script, no en gitignore global)
-scripts/
-tests/
-configs/
-apphosting.yaml
+# DevSecOps / Private (Sanitización manual vía scripts/publish_public.ps1)
+# No ignorar globalmente para permitir el rastreo en el Lab de GitLab
+# scripts/
+# tests/
+# configs/
+# apphosting.yaml
