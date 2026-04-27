@@ -138,6 +138,18 @@ npm run start
 npm run lint
 ```
 
+### Ejecutar Tests
+
+El proyecto cuenta con una suite de pruebas automatizadas con **Vitest**:
+
+```bash
+# Ejecutar tests en modo watch
+npm run test
+
+# Ejecutar tests una sola vez
+npm run test:run
+```
+
 ### Despliegue en Firebase App Hosting
 
 El despliegue se gestiona automáticamente a través de **GitHub Actions** al hacer push a la rama principal. De forma manual:
@@ -146,7 +158,19 @@ El despliegue se gestiona automáticamente a través de **GitHub Actions** al ha
 firebase deploy
 ```
 
-> La configuración en `apphosting.yaml` establece `maxInstances: 1` por defecto. Ajústalo según el tráfico esperado.
+---
+
+## 🤝 Contribución
+
+¡Las contribuciones son bienvenidas! Sigue estos pasos para colaborar:
+
+1. Realiza un **Fork** del proyecto.
+2. Crea una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit siguiendo los [Conventional Commits](https://www.conventionalcommits.org/).
+4. Asegúrate de que los tests pasen (`npm run test:run`).
+5. Abre un **Pull Request** detallando tus cambios.
+
+Consulta [CONTRIBUTING.md](file:///d:/Github/CollabData/CONTRIBUTING.md) para más detalles.
 
 ---
 
