@@ -8,6 +8,8 @@ describe('cn utility', () => {
   });
 
   it('should handle conditional classes', () => {
-    expect(cn('p-4', true && 'bg-blue-500', false && 'hidden')).toBe('p-4 bg-blue-500');
+    const isBlue = true;
+    const isHidden = false;
+    expect(cn('p-4', isBlue && 'bg-blue-500', isHidden && 'hidden')).toBe('p-4 bg-blue-500');
   });
 });
