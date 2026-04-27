@@ -1,5 +1,0 @@
-bee9ba8 docs(root): initialize project documentation and technical blueprint
-7aacc1d docs(root): initialize project documentation and technical blueprint
-909f979 style(docs): align README.md formatting with prettier rules
-4cde448 style(docs): fix prettier formatting in README.md
-f42ba99 docs(root): initialize project documentation and technical blueprint
