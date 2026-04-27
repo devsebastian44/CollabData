@@ -221,32 +221,9 @@ CollabData/
 
 ---
 
-## 🔐 Security & DevSecOps Architecture
+## 🔐 Security & DevSecOps
 
-Este proyecto implementa una arquitectura rigurosa DevSecOps, separando el ecosistema de laboratorio privado y el entorno público de portafolio para maximizar la seguridad por diseño.
-
-### Estrategia Dual-Repo (GitLab ↔ GitHub)
-
-#### 1. GitLab (Laboratorio Privado & Source of Truth)
-
-El repositorio de GitLab sirve como el entorno completo de desarrollo. Contiene:
-
-- **Código íntegro**: Aplicación, flujos completos de IA (`src/ai/flows`), tests y configs.
-- **CI/CD Activo**: Definición en `.gitlab-ci.yml` para ejecutar linting, validación estática y escáner de seguridad en la nube.
-- **Configuraciones Críticas**: Herramientas internas como `apphosting.yaml`.
-
-#### 2. GitHub (Portafolio Público Sanitizado)
-
-La exposición pública se restringe al código estructural esencial. Se omite completamente el entorno de testeo y automatización privada, garantizando una superficie de ataque mínima.
-
-### Sincronización Segura (`publish_public.ps1`)
-
-La transición desde el entorno de laboratorio (GitLab) al portafolio (GitHub) se automatiza estrictamente mediante `scripts/publish_public.ps1`.
-Este script automatiza el flujo de publicación:
-
-1. **Verificación de Entorno:** Exige contexto en `main` sin cambios pendientes.
-2. **Purgado de Archivos Privados:** Elimina lógicas y configuraciones privadas (ej. `tests/`, `configs/`, `src/ai/flows`, `apphosting.yaml` y `.gitlab-ci.yml`) en una rama efímera (`public`).
-3. **Publicación Limpia:** Fuerza un push a GitHub asegurando que el contenido sanitizado refleje un portafolio profesional.
+Este proyecto sigue las mejores prácticas de seguridad para aplicaciones modernas.
 
 ### Autenticación y autorización
 
